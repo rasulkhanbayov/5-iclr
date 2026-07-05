@@ -1,0 +1,134 @@
+[
+  {
+    "clip": "cainhsds2.mp4",
+    "session": "02182026",
+    "raw_response": "CONTROL_IMPACT: YES\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "YES",
+    "control_correct": true,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 13.1
+  },
+  {
+    "clip": "cainhsds1.mp4",
+    "session": "02182026",
+    "raw_response": "CONTROL_IMPACT: YES\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "YES",
+    "control_correct": true,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 10.7
+  },
+  {
+    "clip": "cainhcg1.mp4",
+    "session": "02182026",
+    "raw_response": "CONTROL_IMPACT: YES\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "YES",
+    "control_correct": true,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 14.5
+  },
+  {
+    "clip": "cainltx2.mp4",
+    "session": "02182026",
+    "raw_response": "CONTROL_IMPACT: YES\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "YES",
+    "control_correct": true,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 10.2
+  },
+  {
+    "clip": "water.mp4",
+    "session": "02182026",
+    "raw_response": "CONTROL_IMPACT: YES\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "YES",
+    "control_correct": true,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 10.1
+  },
+  {
+    "clip": "caonly2.mp4",
+    "session": "02182026",
+    "raw_response": "CONTROL_IMPACT: YES\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "YES",
+    "control_correct": true,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 9.9
+  },
+  {
+    "clip": "cainhcg 0.08 b.mp4",
+    "session": "05052026",
+    "raw_response": "CONTROL_IMPACT: NO\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "NO",
+    "control_correct": false,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 15.6
+  },
+  {
+    "clip": "0.45sds3.mp4",
+    "session": "05052026",
+    "raw_response": "CONTROL_IMPACT: YES\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "YES",
+    "control_correct": true,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 16.0
+  },
+  {
+    "clip": "cainhg0.02 2.mp4",
+    "session": "05052026",
+    "raw_response": "CONTROL_IMPACT: NO\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "NO",
+    "control_correct": false,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 8.4
+  },
+  {
+    "clip": "0.08cg.mp4",
+    "session": "05052026",
+    "raw_response": "CONTROL_IMPACT: NO\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "NO",
+    "control_correct": false,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 15.5
+  },
+  {
+    "clip": "0.08cg2.mp4",
+    "session": "05052026",
+    "raw_response": "CONTROL_IMPACT: NO\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "NO",
+    "control_correct": false,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 10.9
+  },
+  {
+    "clip": "0.08cg3.mp4",
+    "session": "05052026",
+    "raw_response": "CONTROL_IMPACT: NO\nRELEASE_HEIGHT_CM: UNKNOWN",
+    "control_answer": "NO",
+    "control_correct": false,
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 15.5
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "n_items": 12,
+  "n_declined": 12,
+  "n_asserted": 0,
+  "n_parse_failed": 0,
+  "hph": 0.0
+}

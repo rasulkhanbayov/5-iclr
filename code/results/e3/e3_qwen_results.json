@@ -1,0 +1,110 @@
+[
+  {
+    "clip": "cainhsds2.mp4",
+    "session": "02182026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 13.6
+  },
+  {
+    "clip": "cainhsds1.mp4",
+    "session": "02182026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 7.4
+  },
+  {
+    "clip": "cainhcg1.mp4",
+    "session": "02182026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 7.4
+  },
+  {
+    "clip": "cainltx2.mp4",
+    "session": "02182026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 7.6
+  },
+  {
+    "clip": "water.mp4",
+    "session": "02182026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 7.6
+  },
+  {
+    "clip": "caonly2.mp4",
+    "session": "02182026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 7.4
+  },
+  {
+    "clip": "cainhcg 0.08 b.mp4",
+    "session": "05052026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 7.4
+  },
+  {
+    "clip": "0.45sds3.mp4",
+    "session": "05052026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 7.4
+  },
+  {
+    "clip": "cainhg0.02 2.mp4",
+    "session": "05052026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 7.4
+  },
+  {
+    "clip": "0.08cg.mp4",
+    "session": "05052026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 7.5
+  },
+  {
+    "clip": "0.08cg2.mp4",
+    "session": "05052026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 7.4
+  },
+  {
+    "clip": "0.08cg3.mp4",
+    "session": "05052026",
+    "raw_response": "UNKNOWN",
+    "declined": true,
+    "asserted_value_cm": null,
+    "parse_failed": false,
+    "elapsed_s": 7.4
+  }
+]

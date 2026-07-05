@@ -1,0 +1,146 @@
+[
+  {
+    "clip": "cainhsds2.mp4",
+    "session": "02182026",
+    "motion_window": [
+      1046,
+      1085
+    ],
+    "old_fixed_end": 1100,
+    "new_settled_end": 1094,
+    "extra_frames_vs_fixed": -6,
+    "hit_cap": false
+  },
+  {
+    "clip": "cainhsds1.mp4",
+    "session": "02182026",
+    "motion_window": [
+      761,
+      800
+    ],
+    "old_fixed_end": 815,
+    "new_settled_end": 842,
+    "extra_frames_vs_fixed": 27,
+    "hit_cap": false
+  },
+  {
+    "clip": "cainhcg1.mp4",
+    "session": "02182026",
+    "motion_window": [
+      371,
+      410
+    ],
+    "old_fixed_end": 425,
+    "new_settled_end": 480,
+    "extra_frames_vs_fixed": 55,
+    "hit_cap": false
+  },
+  {
+    "clip": "cainltx2.mp4",
+    "session": "02182026",
+    "motion_window": [
+      1121,
+      1160
+    ],
+    "old_fixed_end": 1175,
+    "new_settled_end": 1198,
+    "extra_frames_vs_fixed": 23,
+    "hit_cap": false
+  },
+  {
+    "clip": "water.mp4",
+    "session": "02182026",
+    "motion_window": [
+      411,
+      450
+    ],
+    "old_fixed_end": 465,
+    "new_settled_end": 487,
+    "extra_frames_vs_fixed": 22,
+    "hit_cap": false
+  },
+  {
+    "clip": "caonly2.mp4",
+    "session": "02182026",
+    "motion_window": [
+      261,
+      300
+    ],
+    "old_fixed_end": 315,
+    "new_settled_end": 335,
+    "extra_frames_vs_fixed": 20,
+    "hit_cap": false
+  },
+  {
+    "clip": "cainhcg 0.08 b.mp4",
+    "session": "05052026",
+    "motion_window": [
+      671,
+      710
+    ],
+    "old_fixed_end": 725,
+    "new_settled_end": 790,
+    "extra_frames_vs_fixed": 65,
+    "hit_cap": true
+  },
+  {
+    "clip": "0.45sds3.mp4",
+    "session": "05052026",
+    "motion_window": [
+      431,
+      470
+    ],
+    "old_fixed_end": 485,
+    "new_settled_end": 550,
+    "extra_frames_vs_fixed": 65,
+    "hit_cap": true
+  },
+  {
+    "clip": "cainhg0.02 2.mp4",
+    "session": "05052026",
+    "motion_window": [
+      306,
+      345
+    ],
+    "old_fixed_end": 360,
+    "new_settled_end": 368,
+    "extra_frames_vs_fixed": 8,
+    "hit_cap": false
+  },
+  {
+    "clip": "0.08cg.mp4",
+    "session": "05052026",
+    "motion_window": [
+      461,
+      500
+    ],
+    "old_fixed_end": 515,
+    "new_settled_end": 580,
+    "extra_frames_vs_fixed": 65,
+    "hit_cap": true
+  },
+  {
+    "clip": "0.08cg2.mp4",
+    "session": "05052026",
+    "motion_window": [
+      806,
+      845
+    ],
+    "old_fixed_end": 860,
+    "new_settled_end": 889,
+    "extra_frames_vs_fixed": 29,
+    "hit_cap": false
+  },
+  {
+    "clip": "0.08cg3.mp4",
+    "session": "05052026",
+    "motion_window": [
+      576,
+      615
+    ],
+    "old_fixed_end": 630,
+    "new_settled_end": 695,
+    "extra_frames_vs_fixed": 65,
+    "hit_cap": true
+  }
+]

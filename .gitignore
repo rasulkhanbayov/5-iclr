@@ -1,0 +1,20 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.bbl.bak
+*.blg
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+
+# Stale pre-built submission bundle (predates current main.tex/main.pdf)
+sgf_submission.zip
+
+# Local Claude Code session state, not project content
+.claude/

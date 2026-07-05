@@ -1,0 +1,29 @@
+{
+  "objective": "show the metric separates a known-faithful measurer from a known fixed-prior guesser, using real oracle data as the base clip population",
+  "data_source": "48 valid pre-impact velocity measurements from the full 3-session oracle batch run (oracle_batch_results.json)",
+  "alpha_tested": 0.5,
+  "dimension_d": 1,
+  "faithful_remeasurer": {
+    "description": "oracle_base * alpha -- a hypothetical perfectly faithful measurer",
+    "sfs_mean": 0.9999999999982897,
+    "sfs_ci95": [
+      0.9999999999981276,
+      0.9999999999984294
+    ]
+  },
+  "fixed_prior_emitter": {
+    "description": "~1 m/s regardless of base clip, ignores the scale entirely (5% noise, seed=0)",
+    "sfs_mean": 0.03168731254048427,
+    "sfs_ci95": [
+      0.018379709535874176,
+      0.04792126253592705
+    ]
+  },
+  "paired_sign_test": {
+    "n_faithful_better": 48,
+    "n_prior_better": 0,
+    "p_value": 7.105427357601002e-15
+  },
+  "robustness_check": "confirmed SFS~1/~0 separation holds across alpha in {0.5, 2} and 5 random seeds for the prior emitter (see project memory)",
+  "verdict": "PASS"
+}

@@ -1,0 +1,118 @@
+\begin{thebibliography}{18}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Antol et~al.(2015)]{vqa2015}
+Stanislaw Antol et~al.
+\newblock Vqa: Visual question answering.
+\newblock \emph{Proceedings of the IEEE International Conference on Computer
+  Vision}, 2015.
+\newblock \% VERIFY.
+
+\bibitem[Bai et~al.(2025)]{bai2025qwen25vl}
+Shuai Bai et~al.
+\newblock Qwen2.5-vl technical report.
+\newblock \emph{arXiv preprint arXiv:2502.13923}, 2025.
+\newblock \% VERIFY.
+
+\bibitem[{Chow and colleagues}(2025)]{chow2025physbench}
+{Chow and colleagues}.
+\newblock Physbench: Benchmarking and enhancing vision-language models for
+  physical world understanding, 2025.
+\newblock arXiv:2501.16411. \% VERIFY author list.
+
+\bibitem[{Cross-modal synergy authors}(2026)]{crossmodal2026}
+{Cross-modal synergy authors}.
+\newblock Measuring cross-modal synergy: A benchmark for vlm explainability,
+  2026.
+\newblock arXiv:2605.22168. \% VERIFY author list.
+
+\bibitem[Horn and Schunck(1981)]{horn1981optical}
+Berthold~K.P. Horn and Brian~G. Schunck.
+\newblock Determining optical flow.
+\newblock \emph{Artificial Intelligence}, 17:\penalty0 185--203, 1981.
+\newblock \% VERIFY.
+
+\bibitem[{IRIS authors}(2026)]{iris2026}
+{IRIS authors}.
+\newblock Iris: A real-world benchmark for inverse recovery and identification
+  of physical dynamic systems from monocular video, 2026.
+\newblock arXiv:2603.16432. \% VERIFY author list.
+
+\bibitem[Josserand and Thoroddsen(2016)]{josserand2016drop}
+Christophe Josserand and Sigurdur~T. Thoroddsen.
+\newblock Drop impact on a solid surface.
+\newblock \emph{Annual Review of Fluid Mechanics}, 2016.
+\newblock \% VERIFY.
+
+\bibitem[Lanham et~al.(2023)]{lanham2023faithfulness}
+Tamera Lanham et~al.
+\newblock Measuring faithfulness in chain-of-thought reasoning.
+\newblock \emph{arXiv preprint arXiv:2307.13702}, 2023.
+\newblock \% VERIFY.
+
+\bibitem[{Medical VLM faithfulness authors}(2025)]{medfaith2025}
+{Medical VLM faithfulness authors}.
+\newblock Evaluating reasoning faithfulness in medical vision-language models
+  using multimodal perturbations, 2025.
+\newblock arXiv:2510.11196. \% VERIFY author list.
+
+\bibitem[{Morpheus authors}(2025)]{morpheus2025}
+{Morpheus authors}.
+\newblock Morpheus: Benchmarking physical reasoning of video generative models
+  with real physical experiments, 2025.
+\newblock arXiv:2504.02918. \% VERIFY author list.
+
+\bibitem[{PhysicsMind authors}(2026)]{physicsmind2026}
+{PhysicsMind authors}.
+\newblock Physicsmind: Sim and real mechanics benchmarking for physical
+  reasoning and prediction in foundational vlms and world models, 2026.
+\newblock arXiv:2601.16007. \% VERIFY author list.
+
+\bibitem[{QuantiPhy authors}(2025)]{quantiphy2025}
+{QuantiPhy authors}.
+\newblock Quantiphy: A quantitative benchmark evaluating physical reasoning
+  abilities of vision-language models, 2025.
+\newblock arXiv:2512.19526. \% VERIFY author list.
+
+\bibitem[Rioboo et~al.(2002)Rioboo, Marengo, and Tropea]{rioboo2001spreading}
+Romain Rioboo, Marco Marengo, and Cameron Tropea.
+\newblock Time evolution of liquid drop impact onto solid, dry surfaces.
+\newblock \emph{Experiments in Fluids}, 2002.
+\newblock \% VERIFY -- drop impact spreading reference, confirm exact venue.
+
+\bibitem[{RL-VLM robustness authors}(2026)]{rlvlm2026}
+{RL-VLM robustness authors}.
+\newblock On robustness and chain-of-thought consistency of rl-finetuned vlms,
+  2026.
+\newblock arXiv:2602.12506. \% VERIFY author list.
+
+\bibitem[{Step-grounding faithfulness authors}(2026)]{stepground2026}
+{Step-grounding faithfulness authors}.
+\newblock Step-level visual grounding faithfulness predicts out-of-distribution
+  generalization in long-horizon vision-language models, 2026.
+\newblock arXiv:2603.06828. \% VERIFY author list.
+
+\bibitem[Turpin et~al.(2023)]{turpin2023language}
+Miles Turpin et~al.
+\newblock Language models don't always say what they think: Unfaithful
+  explanations in chain-of-thought prompting.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2023.
+\newblock \% VERIFY.
+
+\bibitem[{Visual thinking faithfulness authors}(2025)]{visualthink2025}
+{Visual thinking faithfulness authors}.
+\newblock On the faithfulness of visual thinking: Measurement and enhancement,
+  2025.
+\newblock arXiv:2510.23482. \% VERIFY author list.
+
+\bibitem[Xu et~al.(2026)]{prismvl2026}
+Kepeng Xu et~al.
+\newblock Allegory of the cave: Measurement-grounded vision-language learning,
+  2026.
+\newblock arXiv:2605.11727. \% VERIFY full author list.
+
+\end{thebibliography}

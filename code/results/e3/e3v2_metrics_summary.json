@@ -1,0 +1,14 @@
+{
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "protocol": "v2 (with control question, see prompt_design.py HIDDEN_PRIOR_WITH_CONTROL_PROMPT)",
+  "n_items": 12,
+  "hph_all_items": 0.0,
+  "n_control_correct": 7,
+  "n_control_incorrect": 5,
+  "hph_control_correct_only": 0.0,
+  "control_accuracy_by_session": {
+    "02182026": 1.0,
+    "05052026": 0.16666666666666666
+  },
+  "note": "HPH computed two ways: over all items (uninterpretable ones included), and restricted to items where the model answered the visible control question correctly (meaningful declines only). Both give HPH=0.0 here since the model declined the hidden-prior question in all 12/12 cases regardless of control correctness -- but only 7/12 items have a control-verified, trustworthy engagement with the video (05052026 session control accuracy was only 1/6, a real session-level gap worth investigating separately, not attributable to clip length)."
+}

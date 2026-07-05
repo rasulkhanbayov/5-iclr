@@ -1,0 +1,39 @@
+{
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "n_total_items": 108,
+  "acc_at_10pct": {
+    "mean": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ],
+    "n": 36
+  },
+  "calibration_grounding": {
+    "mean": 0.2222222222222222,
+    "ci95": [
+      0.14814814814814814,
+      0.3055555555555556
+    ],
+    "n": 108
+  },
+  "scale_faithfulness_score": {
+    "0.5": {
+      "sfs_mean": 0.13123719891795232,
+      "sfs_ci95": [
+        0.04320042103724185,
+        0.23764321409819852
+      ],
+      "n_pairs": 36
+    },
+    "2": {
+      "sfs_mean": 0.10684357794243973,
+      "sfs_ci95": [
+        0.05342178897121987,
+        0.1675718781869096
+      ],
+      "n_pairs": 36
+    }
+  },
+  "note": "Model's velocity/calibration answers were found to vary little across different droplet clips within the same (session, condition, seed) group -- ruled out as a pipeline bug (see memory project_sgf_e2_finding.md); treated as real model behavior per user direction. Low SFS/CG here reflects that, not a broken metric."
+}

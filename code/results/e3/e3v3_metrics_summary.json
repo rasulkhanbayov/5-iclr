@@ -1,0 +1,11 @@
+{
+  "n_total": 12,
+  "n_control_correct": 7,
+  "n_asserted_among_verified": 0,
+  "hph_among_control_verified": 0.0,
+  "control_accuracy_by_session": {
+    "02182026": 6,
+    "05052026": 1
+  },
+  "note": "identical control-answer pattern to v2 despite per-clip settle-tuned extraction windows -- extraction timing was NOT the cause of 05052026 failures; root cause identified as low surface-line contrast/framing near the bottom frame edge in 05052026, not clip timing (see memory)"
+}

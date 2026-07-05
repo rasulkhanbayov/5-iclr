@@ -1,0 +1,254 @@
+[
+  {
+    "source": "/ephemeral/videos/02182026/cainhsds2.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/cainhsds2_fall.mp4",
+    "motion_window_frames": [
+      1046,
+      1085
+    ],
+    "extracted_frames": [
+      1031,
+      1094
+    ],
+    "n_frames_written": 64,
+    "output_fps": 15,
+    "real_duration_s": 0.021361815754339118,
+    "playback_duration_s": 4.266666666666667,
+    "slowdown_factor": 199.73333333333335,
+    "settle_criterion_met": "strict",
+    "settle_hit_cap": false,
+    "clip": "cainhsds2.mp4",
+    "session": "02182026"
+  },
+  {
+    "source": "/ephemeral/videos/02182026/cainhsds1.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/cainhsds1_fall.mp4",
+    "motion_window_frames": [
+      761,
+      800
+    ],
+    "extracted_frames": [
+      746,
+      842
+    ],
+    "n_frames_written": 97,
+    "output_fps": 15,
+    "real_duration_s": 0.03237650200267023,
+    "playback_duration_s": 6.466666666666667,
+    "slowdown_factor": 199.73333333333335,
+    "settle_criterion_met": "strict",
+    "settle_hit_cap": false,
+    "clip": "cainhsds1.mp4",
+    "session": "02182026"
+  },
+  {
+    "source": "/ephemeral/videos/02182026/cainhcg1.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/cainhcg1_fall.mp4",
+    "motion_window_frames": [
+      371,
+      410
+    ],
+    "extracted_frames": [
+      356,
+      480
+    ],
+    "n_frames_written": 125,
+    "output_fps": 15,
+    "real_duration_s": 0.04172229639519359,
+    "playback_duration_s": 8.333333333333334,
+    "slowdown_factor": 199.73333333333335,
+    "settle_criterion_met": "plateau",
+    "settle_hit_cap": false,
+    "clip": "cainhcg1.mp4",
+    "session": "02182026"
+  },
+  {
+    "source": "/ephemeral/videos/02182026/cainltx2.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/cainltx2_fall.mp4",
+    "motion_window_frames": [
+      1121,
+      1160
+    ],
+    "extracted_frames": [
+      1106,
+      1198
+    ],
+    "n_frames_written": 93,
+    "output_fps": 15,
+    "real_duration_s": 0.031041388518024033,
+    "playback_duration_s": 6.2,
+    "slowdown_factor": 199.73333333333332,
+    "settle_criterion_met": "plateau",
+    "settle_hit_cap": false,
+    "clip": "cainltx2.mp4",
+    "session": "02182026"
+  },
+  {
+    "source": "/ephemeral/videos/02182026/water.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/water_fall.mp4",
+    "motion_window_frames": [
+      411,
+      450
+    ],
+    "extracted_frames": [
+      396,
+      487
+    ],
+    "n_frames_written": 92,
+    "output_fps": 15,
+    "real_duration_s": 0.030707610146862484,
+    "playback_duration_s": 6.133333333333334,
+    "slowdown_factor": 199.73333333333335,
+    "settle_criterion_met": "plateau",
+    "settle_hit_cap": false,
+    "clip": "water.mp4",
+    "session": "02182026"
+  },
+  {
+    "source": "/ephemeral/videos/02182026/caonly2.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/caonly2_fall.mp4",
+    "motion_window_frames": [
+      261,
+      300
+    ],
+    "extracted_frames": [
+      246,
+      335
+    ],
+    "n_frames_written": 90,
+    "output_fps": 15,
+    "real_duration_s": 0.030040053404539385,
+    "playback_duration_s": 6.0,
+    "slowdown_factor": 199.73333333333335,
+    "settle_criterion_met": "plateau",
+    "settle_hit_cap": false,
+    "clip": "caonly2.mp4",
+    "session": "02182026"
+  },
+  {
+    "source": "/ephemeral/videos/05052026/cainhcg 0.08 b.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/cainhcg 0.08 b_fall.mp4",
+    "motion_window_frames": [
+      671,
+      710
+    ],
+    "extracted_frames": [
+      656,
+      790
+    ],
+    "n_frames_written": 135,
+    "output_fps": 15,
+    "real_duration_s": 0.04506008010680908,
+    "playback_duration_s": 9.0,
+    "slowdown_factor": 199.73333333333335,
+    "settle_criterion_met": null,
+    "settle_hit_cap": true,
+    "clip": "cainhcg 0.08 b.mp4",
+    "session": "05052026"
+  },
+  {
+    "source": "/ephemeral/videos/05052026/0.45sds3.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/0.45sds3_fall.mp4",
+    "motion_window_frames": [
+      431,
+      470
+    ],
+    "extracted_frames": [
+      416,
+      550
+    ],
+    "n_frames_written": 135,
+    "output_fps": 15,
+    "real_duration_s": 0.04506008010680908,
+    "playback_duration_s": 9.0,
+    "slowdown_factor": 199.73333333333335,
+    "settle_criterion_met": null,
+    "settle_hit_cap": true,
+    "clip": "0.45sds3.mp4",
+    "session": "05052026"
+  },
+  {
+    "source": "/ephemeral/videos/05052026/cainhg0.02 2.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/cainhg0.02 2_fall.mp4",
+    "motion_window_frames": [
+      306,
+      345
+    ],
+    "extracted_frames": [
+      291,
+      368
+    ],
+    "n_frames_written": 78,
+    "output_fps": 15,
+    "real_duration_s": 0.0260347129506008,
+    "playback_duration_s": 5.2,
+    "slowdown_factor": 199.73333333333335,
+    "settle_criterion_met": "strict",
+    "settle_hit_cap": false,
+    "clip": "cainhg0.02 2.mp4",
+    "session": "05052026"
+  },
+  {
+    "source": "/ephemeral/videos/05052026/0.08cg.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/0.08cg_fall.mp4",
+    "motion_window_frames": [
+      461,
+      500
+    ],
+    "extracted_frames": [
+      446,
+      580
+    ],
+    "n_frames_written": 135,
+    "output_fps": 15,
+    "real_duration_s": 0.04506008010680908,
+    "playback_duration_s": 9.0,
+    "slowdown_factor": 199.73333333333335,
+    "settle_criterion_met": null,
+    "settle_hit_cap": true,
+    "clip": "0.08cg.mp4",
+    "session": "05052026"
+  },
+  {
+    "source": "/ephemeral/videos/05052026/0.08cg2.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/0.08cg2_fall.mp4",
+    "motion_window_frames": [
+      806,
+      845
+    ],
+    "extracted_frames": [
+      791,
+      889
+    ],
+    "n_frames_written": 99,
+    "output_fps": 15,
+    "real_duration_s": 0.033044058744993325,
+    "playback_duration_s": 6.6,
+    "slowdown_factor": 199.73333333333332,
+    "settle_criterion_met": "plateau",
+    "settle_hit_cap": false,
+    "clip": "0.08cg2.mp4",
+    "session": "05052026"
+  },
+  {
+    "source": "/ephemeral/videos/05052026/0.08cg3.mp4",
+    "out_path": "/ephemeral/sgf_work/model_outputs/fall_clips/0.08cg3_fall.mp4",
+    "motion_window_frames": [
+      576,
+      615
+    ],
+    "extracted_frames": [
+      561,
+      695
+    ],
+    "n_frames_written": 135,
+    "output_fps": 15,
+    "real_duration_s": 0.04506008010680908,
+    "playback_duration_s": 9.0,
+    "slowdown_factor": 199.73333333333335,
+    "settle_criterion_met": null,
+    "settle_hit_cap": true,
+    "clip": "0.08cg3.mp4",
+    "session": "05052026"
+  }
+]

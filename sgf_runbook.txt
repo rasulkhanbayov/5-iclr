@@ -1,0 +1,108 @@
+SGF EXPERIMENT RUNBOOK
+======================
+
+>>> THE TWO MOST IMPORTANT THINGS, READ FIRST <<<
+
+(1) THE PERTURBATION IS A CALIBRATION RELABELING, NOT A FRAME RESAMPLE.
+    To change the calibration by alpha, change WHAT THE IN-FRAME SCALE ASSERTS:
+    present a scale reference whose stated physical length differs by alpha (e.g.
+    swap the ruler for one of a different known length, or state a different
+    physical length for the same graduations), so the true mm-per-pixel becomes
+    alpha*c, WHILE LEAVING THE OBJECT'S PIXEL MOTION UNCHANGED. A faithful measurer
+    then reports alpha**d (d=1 velocity/diameter, d=2 area); a model that ignores
+    the scale stays flat at ~1.
+    Do NOT uniformly resample the whole frame (scaling object and ruler pixels
+    together with the ruler's asserted length fixed): that is INERT -- a faithful
+    measurer reads a proportionally finer calibration and recovers the SAME
+    quantity, so the ideal response is 1 and the test probes nothing. The signal
+    comes from changing what the scale asserts, not the image resolution.
+    Verify on one clip by hand (compute velocity under c and under alpha*c) before
+    running anything at scale.
+
+(2) THE CV ORACLE IS GROUND TRUTH, SO VALIDATE IT FIRST.
+    Run E1 (positive control) before any model. Feed the SGF metric your oracle's
+    own measurements (scaled correctly) and a fixed-prior emitter. You must see
+    SFS near 1 for the oracle and SFS near 0 for the prior emitter. If you do
+    not, fix the oracle or the metric wiring before spending API budget. The
+    released code's synthetic smoke test already demonstrates the target behavior.
+
+
+RESOURCES (pin these exact versions in your paper)
+--------------------------------------------------
+- Python 3.11, numpy (record exact version), opencv-python for the oracle.
+- API models: record exact model IDs and dates (they change). 
+- Open-weight: Qwen2.5-VL (record checkpoint), plus one more open family
+  (e.g. InternVL) for a second data point. Record GPU and inference settings.
+- Public anchor for sanity-checking the oracle's velocity extraction: any
+  free-fall clip with a known release height is fine as an external check.
+
+
+EXPERIMENTS (run in this order)
+-------------------------------
+
+E1  POSITIVE CONTROL (run first, cheap)
+    Objective: show the metric separates a known-faithful from a known-guesser.
+    Data: oracle measurements on all base clips.
+    Method: feed (a) oracle*alpha, (b) constant ~1 m/s emitter into sgf_metrics.
+    Metric: SFS, expect ~1 for (a), ~0 for (b).
+    Expected output: two SFS numbers with bootstrap CIs.
+    Claim supported: "SGF measures anchoring, not arbitrariness." Reduces the
+    "your metric is meaningless" reviewer risk. BLOCKING: do not proceed if it fails.
+
+E2  MAIN: SCALE FAITHFULNESS ACROSS MODELS
+    Objective: per-model SFS, Acc@10%, calibration-grounding CG.
+    Data: base + perturbed clips, alpha in {0.5, 2}.
+    Method: identical prompt to every model; elicit (i) the quantity, (ii) the
+    model's read of the ruler calibration (for CG).
+    Baselines: every model is a "baseline" here; also include the oracle as the
+    ceiling and the fixed-prior emitter as the floor.
+    Metric: SFS, Acc@10%, CG, each with 95% bootstrap CI over items and 3 prompt seeds.
+    Expected output: the main table.
+    Claim supported: contributions 1-2.
+
+E3  HIDDEN-PRIOR TRAP
+    Objective: HPH per model on the off-frame 6.6 cm drop-height question.
+    Method: ask each model for the release height from the video alone; label
+    each response as "declined" vs "asserted a number." HPH = fraction asserting.
+    Expected output: per-model HPH.
+    Claim supported: prior injection is real and measurable.
+
+E4  DECOUPLING ANALYSIS (the headline hypothesis)
+    Objective: correlate Acc@10% with SFS across all items/models.
+    Expected output: correlation coefficient + scatter plot.
+    IMPORTANT HONESTY RULE: our hypothesized headline is that accuracy and
+    faithfulness are DECOUPLED. If the data show they are strongly coupled,
+    report that. The paper then becomes a careful negative/null result, which is
+    still publishable and honest. Reconcile the abstract and intro to whatever
+    you actually find. Do NOT keep the "decoupled" framing if it is not true.
+
+E5  ROBUSTNESS
+    Objective: SFS stability across alpha values, ruler type (horizontal vs
+    vertical), and prompt phrasings.
+    Expected output: stability table.
+    Claim supported: the effect is not a single-prompt artifact.
+
+
+FLAG-BACK TRIGGERS (stop and rethink if any occur)
+--------------------------------------------------
+- E1 fails (metric does not separate oracle from guesser): metric/oracle bug.
+- Oracle velocity disagrees with a hand-tracked check by >10%: fix the oracle.
+- All models score SFS near 1: either models are genuinely faithful (great, but
+  re-confirm the perturbation actually changed the labeled scale) or the
+  perturbation leaked into dynamics (bug). Investigate before claiming anything.
+- Item count after perturbation rendering is very small per condition: report it
+  honestly and widen CIs; consider pooling conditions for the main analysis.
+
+
+INTEGRITY REMINDERS
+-------------------
+- Numbers in the draft are PLACEHOLDERS. Replace every [RESULT PLACEHOLDER] and
+  remove every >>> TO RUN tag only after the real run.
+- The AI-drafted Proposition 1 and its proof, and the method, MUST be checked by
+  a human author. Confirm the calibration-degree d for each quantity (length d=1,
+  velocity d=1 with fixed frame rate, area d=2).
+- Confirm novelty against arXiv the week before submission; resolve the
+  [UNVERIFIED] flag in Table 1.
+- Fill every % VERIFY citation in sgf.bib with the real author list.
+- Get 2-3 independent human mock reviews and resolve every raised issue before
+  submitting. Treat unresolved issues as blocking.
