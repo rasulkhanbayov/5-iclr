@@ -87,19 +87,29 @@ classical computer-vision oracle and release the protocol, metric code, and a
 recipe for extending it to any video with an in-frame scale reference. A
 positive-control experiment confirms the metric and oracle correctly separate a
 known-faithful measurer from a known prior-driven guesser ($\sfs\to1$ vs.\
-$\sfs\to0.03$, $p{=}7\times10^{-15}$). Evaluating one open-weight VLM
-(Qwen2.5-VL-7B-Instruct; no API access was available in our evaluation
-environment) on the instantiated dataset, we find the model is essentially
-non-responsive to the scale perturbation ($\sfs\approx0.11$--$0.19$) and its
-tolerance-band accuracy is saturated at zero, which means the accuracy-vs-faithfulness
+$\sfs\to0.03$, $p{=}7\times10^{-15}$). Evaluating two independent VLM families
+(Qwen2.5-VL-7B-Instruct, open-weight; and Gemini-2.5-Flash-Lite, via API) on the
+instantiated dataset, we find \emph{both} models essentially non-responsive to
+the scale perturbation ($\sfs\approx0.04$--$0.19$ across models and $\alpha$) and
+\emph{both} models' tolerance-band accuracy saturated at exactly zero
+($0/36$ items each, $0/72$ pooled), which means the accuracy-vs-faithfulness
 decoupling question this protocol is designed to answer cannot be meaningfully
-posed for this model: there is no accuracy variance left to correlate against
-faithfulness. We report this as an honest, informative null result rather than
-force a conclusion the data do not support, and argue it illustrates exactly the
-failure mode SGF is built to expose: a model can be too ungrounded to even be
-usefully wrong in a scale-consistent way. We release the full protocol,
-perturbation renderer, and evaluation code so the decoupling question can be
-properly tested on models whose accuracy is not saturated.
+posed for either model: there is no accuracy variance left to correlate against
+faithfulness. This is a stronger finding than a single-model result would be: it
+is not one model's idiosyncrasy but a property that survives across two
+independently trained model families on this task and this tolerance. We report
+this as an honest, informative null result rather than force a conclusion the
+data do not support, and argue it illustrates exactly the failure mode SGF is
+built to expose: a model can be too ungrounded to even be usefully wrong in a
+scale-consistent way. The two models diverge sharply at a looser 30\%
+tolerance (2.8\% vs.\ 33.3\%), which looked like a lead toward recovering the
+originally hypothesized decoupled pattern at a different tolerance; sweeping
+the tolerance from 10\% to 100\% on the same data shows this does not hold --
+the accuracy-faithfulness correlation is negative everywhere it is computable,
+never resembling the hypothesized pattern, and the accuracy gain driving the
+30\% divergence is itself a session-specific confound, not broader measurement
+ability. We release the full protocol, perturbation renderer, and evaluation
+code so the decoupling question can be properly tested on further models.
 \end{abstract}
 
 \section{Introduction}
@@ -199,15 +209,17 @@ authors must re-confirm against the literature before submission.
 controlled droplet-impact dataset with a classical-CV oracle, release the metric
 code and protocol, and give the recipe to extend it to any video containing an
 in-frame scale reference.
-\item \textbf{A validated instantiation and an honest single-model finding.} A
+\item \textbf{A validated instantiation and an honest two-model finding.} A
 positive-control experiment (E1, Section~\ref{sec:exp}) confirms the metric and
 oracle separate a known-faithful measurer from a known prior-driven guesser
-cleanly. Evaluating one open-weight VLM on the instantiated dataset, we find
-accuracy saturated at zero and faithfulness uniformly low, which blocks rather
-than answers the decoupling question SGF is designed to probe -- we report this
-null result explicitly (Section~\ref{sec:results}) rather than reframe around a
-weaker but positive-sounding claim, and argue the failure mode itself
-(a model too ungrounded to be usefully wrong) is worth documenting.
+cleanly. Evaluating two independent VLM families (one open-weight, one via API)
+on the instantiated dataset, we find accuracy saturated at exactly zero for
+\emph{both}, independently, and faithfulness uniformly low for both, which
+blocks rather than answers the decoupling question SGF is designed to probe --
+we report this null result explicitly (Section~\ref{sec:results}) rather than
+reframe around a weaker but positive-sounding claim, and argue the failure mode
+itself (two independently trained models both too ungrounded to be usefully
+wrong) is worth documenting precisely because it is not one model's quirk.
 \end{enumerate}
 We confirm novelty by deep, date-aware search of the closest current work
 (Section~\ref{sec:related} and Table~\ref{tab:novelty}); authors must re-confirm
@@ -550,14 +562,17 @@ larger and more diverse datasets than this one.
 
 \section{Experimental Protocol}
 \label{sec:exp}
-We evaluate one open-weight VLM, Qwen2.5-VL-7B-Instruct
-\citep{bai2025qwen25vl}, under identical prompts across three paraphrased
-seeds. \textbf{No API-model results are reported}: our evaluation environment
-had no API keys provisioned for any proprietary model, so the multi-model
-comparison the protocol is designed to support is not part of this submission;
-Section~\ref{sec:limitations} discusses the consequence for what can and cannot
-be concluded. We report mean and 95\% bootstrap CIs over items and prompt seeds
-throughout.
+We evaluate two independent VLM families under identical prompts across three
+paraphrased seeds: Qwen2.5-VL-7B-Instruct \citep{bai2025qwen25vl}, open-weight,
+run locally; and Gemini-2.5-Flash-Lite, accessed via API (OpenRouter), added
+specifically to test whether the single-model gap in an earlier draft of this
+submission changed the E2/E4 findings. \textbf{E2 and E4 are run on both
+models; E1, E3, and E5 use Qwen2.5-VL-7B-Instruct only} (E1 uses simulated
+re-measurers rather than a model at all; E3 and E5 were run before API access
+became available and are not repeated here since neither's conclusion depends
+on a specific model's accuracy level -- Section~\ref{sec:limitations} still
+flags this as an opportunity for future extension). We report mean and 95\%
+bootstrap CIs over items and prompt seeds throughout.
 
 \paragraph{E1 (positive control, run first).} Validate that the CV oracle and
 the SGF metric separate a \emph{known} faithful pipeline from a \emph{known}
@@ -568,10 +583,10 @@ times $\alpha$, simulating a perfectly faithful measurer; (b) a fixed $\sim\!1\,
 ignores the scale. Confirmed robust across $\alpha\in\{0.5,2\}$ and 5 random
 seeds for (b).
 
-\paragraph{E2 (main: scale faithfulness).} For the model and $\alpha\in\{0.5,2\}$,
+\paragraph{E2 (main: scale faithfulness).} For each model and $\alpha\in\{0.5,2\}$,
 compute $\sfs$, $\acc@10\%$, $\cg$ on a 12-clip subset (6 clips each from the two
 ruler-target sessions) $\times$ 3 conditions (unperturbed, $\alpha{=}0.5$,
-$\alpha{=}2$) $\times$ 3 prompt seeds = 108 model calls.
+$\alpha{=}2$) $\times$ 3 prompt seeds = 108 model calls per model, 216 total.
 
 \paragraph{E3 (hidden-prior trap).} Measure $\hph$ on the off-frame drop-height
 question. \textbf{Redesigned mid-study after a validity failure}: an initial
@@ -587,11 +602,12 @@ answers the control correctly, which establishes it engaged with the video at
 all for that item.
 
 \paragraph{E4 (decoupling analysis).} Correlate per-item $\acc@10\%$ with
-per-item $\sfs$ across the 36 (clip, seed) items from E2. The runbook's
-hypothesized headline was that accuracy and faithfulness are decoupled; as
-detailed in Section~\ref{sec:results}, this question turned out not to be
-answerable as specified for this model, which we report rather than substitute
-a different, more favorable-looking analysis without flagging it.
+per-item $\sfs$ across the 36 (clip, seed) items from E2, per model and pooled
+across both (72 items). The runbook's hypothesized headline was that accuracy
+and faithfulness are decoupled; as detailed in Section~\ref{sec:results}, this
+question turned out not to be answerable as specified for \emph{either} model,
+which we report rather than substitute a different, more favorable-looking
+analysis without flagging it.
 
 \paragraph{E5 (robustness).} Vary $\alpha\in\{0.25,0.5,2,4\}$, ruler orientation,
 and prompt phrasing on 2 representative clips (one per ruler-target session),
@@ -629,36 +645,48 @@ exactly as designed.}
 \label{tab:e1}
 \end{center}
 
-\paragraph{E2: the model is essentially non-responsive.}
+\paragraph{E2: both models are essentially non-responsive, in different ways.}
 Qwen2.5-VL-7B-Instruct scored $\acc@10\% = 0.000$ (95\% CI $[0.000,0.000]$,
 $n{=}36$), $\cg = 0.222$ (95\% CI $[0.148, 0.306]$, $n{=}108$), and
 $\sfs = 0.131$ (95\% CI $[0.043, 0.238]$) at $\alpha{=}0.5$ and $\sfs = 0.107$
-(95\% CI $[0.053, 0.168]$) at $\alpha{=}2$. We investigated whether this was a
-pipeline bug before trusting it: the model's velocity and calibration answers
-vary only slightly across genuinely different droplet clips within a condition
-group, drawing from a small set of near-constant values (e.g.\ $0.5$, $1.5$,
-$3.5\,\mathrm{m/s}$) that correlate more with which prompt seed was used than
-with what the clip shows. We confirmed the model \emph{can} perceive and
-describe the two videos correctly when asked to do so directly; it does not
-reliably perform the compositional measurement task (read the scale, track the
-object, convert) that SGF and the underlying benchmarks it critiques both
-require.
+(95\% CI $[0.053, 0.168]$) at $\alpha{=}2$. Gemini-2.5-Flash-Lite scored
+$\acc@10\% = 0.000$ as well (identically zero, $n{=}36$), $\cg = 0.380$ (better
+than Qwen but still low), and $\sfs = 0.071$ at $\alpha{=}0.5$ and
+$\sfs = 0.041$ at $\alpha{=}2$ (both \emph{lower} than Qwen's). We investigated
+whether either result was a pipeline bug before trusting it: Qwen's velocity and
+calibration answers vary only slightly across genuinely different droplet clips
+within a condition group, drawing from a small set of near-constant values
+(e.g.\ $0.5$, $1.5$, $3.5\,\mathrm{m/s}$) that correlate more with which prompt
+seed was used than with what the clip shows. Gemini shows a related but distinct
+failure: on one session it reports the identical calibration ($1.0\,\mathrm{mm}$
+per tick) across all three perturbation conditions, and on the other it never
+once reports the correct relabeled value ($2.0$) even when we confirmed by
+direct frame inspection that the on-screen label legibly reads the perturbed
+number -- both models default to a physically plausible prior rather than
+reading the digits actually in front of them, just with different, model-specific
+priors. We confirmed both models \emph{can} perceive and describe the two videos
+correctly when asked to do so directly; neither reliably performs the
+compositional measurement task (read the scale, track the object, convert) that
+SGF and the underlying benchmarks it critiques both require.
 
 \begin{center}
 \small
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Metric} & \textbf{Value} & \textbf{95\% CI} & $n$ \\
+\textbf{Metric} & \textbf{Qwen2.5-VL-7B} & \textbf{Gemini-2.5-Flash-Lite} & $n$ \\
 \midrule
-$\acc@10\%$ & 0.000 & [0.000, 0.000] & 36 \\
-$\cg$ (calibration grounding) & 0.222 & [0.148, 0.306] & 108 \\
-$\sfs$ ($\alpha{=}0.5$) & 0.131 & [0.043, 0.238] & 36 \\
-$\sfs$ ($\alpha{=}2$) & 0.107 & [0.053, 0.168] & 36 \\
+$\acc@10\%$ & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 36 \\
+$\acc@30\%$ (secondary) & 0.028 & 0.333 & 36 \\
+$\cg$ (calibration grounding) & 0.222 [0.148, 0.306] & 0.380 & 108 \\
+$\sfs$ ($\alpha{=}0.5$) & 0.131 [0.043, 0.238] & 0.071 [0.024, 0.128] & 36 \\
+$\sfs$ ($\alpha{=}2$) & 0.107 [0.053, 0.168] & 0.041 [0.015, 0.078] & 36 \\
 \bottomrule
 \end{tabular}
-\captionof{table}{\textbf{E2 main table, Qwen2.5-VL-7B-Instruct.} Low accuracy,
-low calibration grounding, low faithfulness: the model is not reliably
-performing the measurement task at all, in either sense.}
+\captionof{table}{\textbf{E2 main table, both models.} Low accuracy, low
+calibration grounding, low faithfulness for both: neither model reliably
+performs the measurement task, in either sense. $\acc@30\%$ (not part of the
+protocol's primary metric set) is included because it is the one row where the
+models diverge sharply -- see the E4 discussion below.}
 \label{tab:e2}
 \end{center}
 
@@ -678,31 +706,78 @@ control-answer pattern was unchanged, clip for clip. Direct frame-by-frame
 comparison then showed the actual cause: the failing session's camera framing
 compresses the impact surface into a thin, heavily vignette-darkened strip at
 the extreme bottom of frame, versus the passing session's surface sitting in a
-well-lit middle region. This is a property of that session's camera setup, not
-a fixable pipeline defect, and we report it as a dataset limitation rather than
-retry until it disappears.
+well-lit middle region.
 
-\paragraph{E4: the decoupling question could not be posed as specified.}
-$\acc@10\%$ is exactly 0 for all 36 items (Table~\ref{tab:e2}), so the
-per-item accuracy indicator the runbook specifies has zero variance;
-correlating a score against a constant is undefined, not evidence of zero
-correlation. Substituting continuous relative error (negated, so higher means
-more accurate) as the closest computable stand-in gives Pearson
-$r = -0.481$ (95\% CI $[-0.708, -0.029]$, excluding zero) against $\sfs$ --
-but we do not report this as a clean coupling or decoupling finding. Cross-checking
-against the E2 near-constant-response pattern shows the model's base-condition
-velocity takes only three distinct values across all 36 items, driven almost
-entirely by which prompt seed was used rather than by clip content; both the
-``accuracy'' and the ``faithfulness'' axes being correlated here are downstream
-of the same non-responsiveness, not independent measurements of two different
-capabilities. \textbf{We therefore report E4 as inconclusive for this model,
-not as support for either the ``decoupled'' or the ``coupled'' framing}: a
-number-only benchmark cannot be shown to over-credit prior-driven guessing when
-the model in question is not accurate under any framing, on any item. The
-positive-control result (E1) shows the machinery is capable of detecting real
-decoupling when it is present; testing whether it exists in a fielded model
-requires a model whose accuracy is not saturated at zero, which we did not have
-access to in this environment.
+\noindent\textbf{Partially recoverable by post-processing.} A whole-frame
+contrast fix (linear stretch, CLAHE) barely helped -- the entire frame has low
+dynamic range (peak pixel value $\approx\!90/255$), not just the surface strip,
+so there is no unused headroom for a global remap to exploit. Cropping tightly
+to the impact region (located via the same track-linking already used for
+velocity measurement) and contrast-stretching only that local crop, per frame,
+made the surface boundary and impact shape clearly legible by eye on all 5
+failing clips. Rerunning the control question on the 5 enhanced clips recovered
+\textbf{1 of 5} ($\hph$ coverage improves from 7/12 to 8/12). One of the
+remaining 4 is the confirmed multi-droplet clip, where the model's wrong answer
+is plausibly about \emph{which} droplet is being asked about, not visibility,
+so contrast enhancement was never expected to fix it. The other 3 still fail
+despite visibly clear enhanced crops; we did not chase this further; the
+necessarily small crop size may be downsampled by the model's default video
+preprocessing in a way that undoes the local contrast gain, but we have not
+confirmed this and report it as an open question rather than a diagnosed cause.
+This is a property of that session's camera setup, only partially addressable
+after the fact, not a fixable pipeline defect, and we report the remaining
+4/12 gap as a dataset limitation rather than retry indefinitely.
+
+\paragraph{E4: adding a second, independent model family does not resolve the
+decoupling question -- it strengthens the null result.} $\acc@10\%$ is exactly
+0 for Qwen (36/36 items) \emph{and} for Gemini (36/36 items) \emph{and} for the
+72-item pool of both -- the per-item accuracy indicator the runbook specifies
+has zero variance in every case; correlating a score against a constant is
+undefined, not evidence of zero correlation. This is a materially stronger
+finding than the single-model version in an earlier draft of this submission:
+it is not one model's idiosyncrasy that happened to saturate, but a property
+that held independently across two differently-trained model families at this
+tolerance. Substituting continuous relative error (negated, so higher means
+more accurate) as the closest computable stand-in gives Pearson $r = -0.481$
+(95\% CI $[-0.708, -0.029]$, excluding zero) for Qwen alone, $r = -0.218$
+(95\% CI $[-0.671, 0.063]$, \emph{including} zero -- not significant on its
+own) for Gemini alone, and $r = -0.460$ (95\% CI $[-0.664, -0.094]$, excluding
+zero) pooled. We do not report the pooled correlation as a clean coupling
+finding: cross-checking against the E2 near-constant-response pattern shows
+both models' base-condition outputs are driven substantially by which prompt
+seed or which physically-plausible prior was invoked rather than by clip
+content, so both the ``accuracy'' and the ``faithfulness'' axes being
+correlated here are downstream of the same non-responsiveness in each model,
+not independent measurements of two different capabilities.
+\textbf{We therefore report E4 as inconclusive at the $10\%$ tolerance for both
+models tested, not as support for either the ``decoupled'' or the ``coupled''
+framing}: a number-only benchmark cannot be shown to over-credit prior-driven
+guessing when neither model tested is accurate under any framing, on any item,
+at that tolerance. The positive-control result (E1) shows the machinery is
+capable of detecting real decoupling when it is present; testing whether it
+exists in a fielded model requires a model whose accuracy is not saturated at
+zero at the tolerance used.
+
+\noindent\textbf{We checked whether a looser tolerance recovers the
+hypothesized decoupled pattern; it does not.} Table~\ref{tab:e2}'s secondary
+$\acc@30\%$ row shows Gemini's accuracy rising sharply at a looser tolerance
+($0.333$ vs.\ Qwen's $0.028$), which looked like a plausible lead. We swept
+$\tau$ from $10\%$ to $100\%$ on the same, already-collected E2 responses (no
+new model calls). The correlation between $\acc@\tau$ and $\sfs$ becomes
+computable once $\tau\!\ge\!15$--$30\%$ (enough items clear the bar for the
+indicator to have variance), but it is \textbf{negative at every tolerance
+where it is measurable} -- for Gemini, $r=-0.415$ at $\tau{=}30\%$ (95\% CI
+$[-0.549,-0.293]$, excluding zero); pooled, $r$ ranges from $-0.10$ to $-0.25$
+across $\tau\!\in\![15\%,75\%]$. It never once resembles the originally
+hypothesized pattern (high accuracy co-occurring with low $\sfs$,
+$r\!\approx\!0$ or positive). Worse, Gemini's apparent accuracy gain at
+$\tau{=}30\%$ is itself a confound of the same kind documented in E2: all 12 of
+its hits come from a single session, whose true velocities happen to sit close
+to Gemini's favorite near-constant output value, not from broader measurement
+ability. We report this explicitly rather than let the $\acc@30\%$ row stand as
+an unexamined lead: loosening the tolerance does not rescue the decoupling
+analysis on these two models, and the honest conclusion is that decoupling
+remains untested, not weakly supported, at every tolerance we could compute.
 
 \paragraph{E5: real robustness on two axes, and a third axis's apparent
 instability is itself an artifact worth naming.} SFS is stable across ruler
@@ -746,18 +821,30 @@ alpha-dependent faithfulness effect.}
 \paragraph{Reconciling the introduction's headline claim.} We hypothesized that
 accuracy and faithfulness would prove decoupled. The honest finding is
 narrower: we validated that SGF's machinery can detect decoupling when it
-exists (E1), and we demonstrate on one open-weight model that a number-only
-benchmark's accuracy score can be completely uninformative about scale-grounding
-behavior (E2's $\acc@10\%{=}0$ alongside nonzero but low $\sfs$) -- but we
-cannot claim the accuracy-faithfulness \emph{correlation} is decoupled, coupled,
-or anything else with this single model, because accuracy never varies enough to
-correlate against (E4). We consider this worth publishing rather than
-discarding: it identifies a real failure mode (a model too ungrounded to be
-usefully wrong in a scale-consistent way defeats the decoupling test itself, not
-just the accuracy test) and it is exactly the kind of result the field needs
-more of if quantitative VLM benchmarks are to be trusted -- a protocol,
-validated end to end, applied honestly, that reports a null result when that is
-what the data show.
+exists (E1), and we demonstrate on \emph{two independent model families} that a
+number-only benchmark's accuracy score can be completely uninformative about
+scale-grounding behavior (E2's $\acc@10\%{=}0$ for both, alongside nonzero but
+low $\sfs$ for both) -- but we cannot claim the accuracy-faithfulness
+\emph{correlation} is decoupled, coupled, or anything else at this tolerance,
+because accuracy never varies enough to correlate against for either model
+(E4). That this holds across two differently trained, differently sized,
+differently served models (one open-weight and local, one closed and
+API-served) is stronger evidence than a single-model result could give that the
+finding is about the task and tolerance, not about one model's training
+idiosyncrasies. We consider this worth publishing rather than discarding: it
+identifies a real failure mode (models too ungrounded to be usefully wrong in a
+scale-consistent way defeat the decoupling test itself, not just the accuracy
+test) and it is exactly the kind of result the field needs more of if
+quantitative VLM benchmarks are to be trusted -- a protocol, validated end to
+end, applied honestly, that reports a null result when that is what the data
+show. The $\acc@30\%$ divergence between models (Table~\ref{tab:e2}) looked
+like a concrete lead for recovering the originally hypothesized decoupled
+pattern at a looser tolerance; we checked this directly (the $\tau$-sweep in
+the E4 discussion above) and it does not hold -- the correlation is negative
+everywhere it is computable, and the apparent accuracy gain driving it is
+itself a session-specific confound. We report the negative result rather than
+leave the lead open, since a reader would otherwise reasonably ask whether we
+had checked.
 
 \section{Reproducibility}
 \label{sec:repro}
@@ -765,29 +852,41 @@ We release \texttt{sgf\_metrics.py} (numpy-only) implementing $\sfs$, $\cg$,
 $\hph$, bootstrap CIs, and a paired sign test, with a synthetic smoke test that
 verifies the metric separates a faithful measurer, a partial measurer, and a
 prior-driven guesser. The perturbation renderer, prompts, and oracle scripts are
-released with the data. Pinned versions and exact model identifiers are listed in
-the runbook.
+released with the data, including both inference clients used
+(local Qwen2.5-VL via \texttt{transformers}, and Gemini-2.5-Flash-Lite via the
+OpenRouter API) so either model's results can be reproduced or a new model
+substituted with minimal changes. Pinned versions and exact model identifiers
+are listed in the runbook.
 
 \section{Limitations}
 \label{sec:limitations}
-\textbf{Single model, no API access.} Our evaluation environment provisioned no
-API keys for any proprietary model, so we report results for one open-weight VLM
-only. The protocol's central comparison (does a per-item accuracy-faithfulness
-correlation exist, and does it vary across models of different capability
-tiers) is therefore untested here; Section~\ref{sec:results} explains why this
-also makes E4's decoupling question unanswerable as specified for this
-submission, not merely under-powered. This is the most important limitation of
-the current results and the most valuable next step for anyone extending this
-work.
+\textbf{Two models, both saturated -- broader than one model but still not the
+full comparison the protocol is designed to support.} An earlier draft of this
+submission reported results for a single open-weight VLM because our
+evaluation environment initially had no API access; we later obtained limited
+API budget and added Gemini-2.5-Flash-Lite to E2 and E4 specifically to close
+that gap. The result did not change the substantive limitation, it generalized
+it: both models independently saturate at $\acc@10\%{=}0$, so E4's decoupling
+question remains unanswerable as specified, now for two model families rather
+than one. We did not have budget or access to extend this to a third,
+higher-capability frontier model (e.g.\ a top-tier proprietary model at full
+context and resolution), nor to systematically vary model \emph{capability
+tier} rather than just family, which is what the protocol's central comparison
+actually calls for. This is still the most valuable next step for anyone
+extending this work, and the $\acc@30\%$ divergence between our two models
+(Table~\ref{tab:e2}) suggests it may be tractable without needing a third model
+at all -- rerunning E4 at a coarser tolerance on the same two models is a
+natural first extension.
 
 \noindent\textbf{A model that fails saturates the very test designed to
-characterize it.} Our headline finding is that Qwen2.5-VL-7B-Instruct is
-non-responsive enough that $\acc@10\%{=}0$ leaves no accuracy variance to
-correlate against faithfulness. This is itself informative -- it shows number-only
-benchmarks can be completely silent about grounding even in the failure case,
-not only the success case -- but it means SGF's decoupling analysis needs at
-least one model with non-degenerate accuracy to be conclusive, which we did not
-have.
+characterize it.} Our headline finding is that both Qwen2.5-VL-7B-Instruct and
+Gemini-2.5-Flash-Lite are non-responsive enough that $\acc@10\%{=}0$ leaves no
+accuracy variance to correlate against faithfulness, independently and pooled.
+This is itself informative -- it shows number-only benchmarks can be completely
+silent about grounding even in the failure case, not only the success case --
+but it means SGF's decoupling analysis needs at least one model with
+non-degenerate accuracy \emph{at the tolerance used} to be conclusive, which we
+did not have among the models we could afford to evaluate.
 
 \noindent\textbf{Dataset scale and session exclusion.} The dataset is a single
 phenomenon, further narrowed from five recorded sessions to three after
@@ -795,12 +894,18 @@ verification (Section~\ref{sec:data}), and model evaluation used a 12-clip
 subset of those three. Breadth across phenomena and larger item counts are
 future work; the protocol is designed to enable both without modification.
 
-\noindent\textbf{A session-specific engagement confound in E3.} Five of twelve
-E3 items could not be scored because the model failed a trivially-easy control
-question on that session's footage; we traced this to a genuine camera-framing
-issue (Section~\ref{sec:results}) rather than a model or pipeline defect, but it
-does mean E3's $\hph{=}0$ finding covers 7 of 12 items, not all 12, and should
-not be quoted without that qualifier.
+\noindent\textbf{A session-specific engagement confound in E3, partially but
+not fully fixable.} Five of twelve E3 items originally could not be scored
+because the model failed a trivially-easy control question on that session's
+footage; we traced this to a genuine camera-framing issue (low dynamic range
+concentrated in a thin surface strip, Section~\ref{sec:results}) rather than a
+model or pipeline defect. A targeted crop-and-contrast-enhance fix recovered 1
+of the 5 (coverage is now 8 of 12, not 7); the remaining 4 include the one
+clip with a genuine second-droplet confound (unfixable by contrast, since the
+ambiguity is about which object is being asked about) and 3 that still fail
+despite visibly clear enhanced footage, for reasons we have not fully
+diagnosed. E3's $\hph{=}0$ finding should be quoted as covering 8 of 12 items,
+not all 12.
 
 \noindent\textbf{Spatial, not temporal, calibration.} SGF as presented perturbs
 the spatial scale only, not the time axis, so it tests spatial-calibration

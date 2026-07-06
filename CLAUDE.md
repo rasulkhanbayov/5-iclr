@@ -182,6 +182,21 @@ Rendered perturbed scale clips (alpha in {0.5, 2}) go in `/ephemeral/sgf_work/pe
   evidence rather than a defect to engineer away. Full detail in memory `project_sgf_e3_results.md`.
   Results: `/ephemeral/sgf_work/results/e3/e3v3_qwen_results.json` + `e3v3_metrics_summary.json`
   (v2 kept for comparison, same numbers).
+  **UPDATE (2026-07-06), improvement plan A2: partially fixed the 05052026 framing issue.** Global
+  contrast fixes (linear stretch, CLAHE) barely helped — the whole frame has low dynamic range
+  (peak pixel ~90/255), not just the surface strip. What worked: crop tightly to the impact region
+  (via the oracle's own track-linking) and contrast-stretch only that local crop, per frame.
+  Rerunning the control question on the 5 enhanced clips recovered **1/5** (`0.08cg3.mp4`) — HPH
+  coverage improves to **8/12** (was 7/12). Of the remaining 4: 1 is the confirmed multi-droplet
+  clip (`cainhcg 0.08 b.mp4`, unfixable by contrast since the ambiguity is about which droplet, not
+  visibility); the other 3 still fail despite visibly clear enhanced crops, plausibly because the
+  necessarily small crop (~440x420px) gets downsampled by the model's default video preprocessing
+  in a way that undoes the local contrast gain — not confirmed, reported as an open question, not
+  chased further (avoided repeating the earlier multi-droplet-detector many-rounds-diminishing-
+  returns pattern). **main.tex updated**: E3 discussion gets a new "partially recoverable by
+  post-processing" paragraph; Limitations' E3 paragraph now states 8/12. Code:
+  `enhance_e3_clips.py`, `run_e3_enhanced_retest.py`. Results: `fall_clips_enhanced/`,
+  `e3_enhanced_retest_results.json`. Full detail: memory `project_sgf_e3_a2_enhancement.md`.
 - **Phase 6 (E4 decoupling analysis):** DONE, with an important caveat. Runbook objective:
   correlate per-item Acc@10% with per-item SFS across E2's 36 (clip x seed) items.
   **The literal question is unanswerable at the 10% threshold** — Acc@10%_hit is 0 for all 36/36
@@ -203,6 +218,34 @@ Rendered perturbed scale clips (alpha in {0.5, 2}) go in `/ephemeral/sgf_work/pe
   re-run once a second model is added (this analysis only has one model to correlate "across").
   Code: `/ephemeral/sgf_work/model_outputs/run_e4_decoupling.py`. Results:
   `/ephemeral/sgf_work/results/e4/e4_decoupling.json` + `e4_scatter.png`.
+  **UPDATE (2026-07-06): second model added via OpenRouter, re-ran E2+E4.** User provided an
+  OpenRouter API key ($31.30 budget) specifically to close the single-model gap. Added
+  `google/gemini-2.5-flash-lite` (cost-checked first: ~$0.0003/call, full 108-call E2 batch cost
+  only $0.0324 total). **Result: does NOT resolve the degeneracy, generalizes it** — Acc@10%=0 for
+  Gemini too (36/36) and for the 72-item pool (72/72). Gemini's failure mode is related but
+  distinct from Qwen's: on 05052026 it reports calibration=1.0 across ALL conditions (complete
+  non-response), on 02182026 it never once reports the correct alpha=2 value (2.0) even though the
+  on-screen "24" label was confirmed legible by direct frame extraction — both models default to a
+  physically-plausible prior instead of reading the digits, just different priors. Pooled r(-rel_err,
+  SFS) = -0.460 (CI [-0.664,-0.094], excludes 0); Gemini-alone r=-0.218 (CI [-0.671,0.063],
+  INCLUDES zero, not significant alone). Same confound caveat applies to Gemini too. **Secondary
+  finding**: Gemini is much more accurate at looser tolerance (Acc@30%=0.333 vs Qwen's 0.028)
+  despite both being 0 at Acc@10%. **main.tex updated accordingly** (abstract, contributions,
+  E2/E4 protocol + results, Limitations) — paper now reports a genuine two-model finding, not a
+  single-model limitation. Code: `run_openrouter_inference.py`, `run_e2_batch_openrouter.py`,
+  `run_e4_multimodel.py`. Results: `e2_gemini_flash_lite_results.json`,
+  `e4_multimodel_decoupling.json`. Full detail: memory `project_sgf_openrouter_e2_e4_results.md`.
+  **UPDATE (2026-07-06), improvement plan A1: checked whether the Acc@30% lead actually rescues
+  the decoupling analysis at a looser tolerance — it does NOT.** Swept tau from 10% to 100% on the
+  same already-collected E2 data (zero new API calls). Correlation becomes computable at
+  tau>=15-30% but is NEGATIVE at every tolerance where measurable (Gemini r=-0.415 at tau=30%, CI
+  excludes 0; pooled r ranges -0.10 to -0.25 across tau in [15%,75%]) — never resembles the
+  originally hypothesized decoupled pattern. Worse, confirmed Gemini's Acc@30% "hits" are ALL from
+  one session (05052026) whose true velocities happen to sit near Gemini's favorite constant
+  output — the same near-constant-palette confound, not real accuracy gain. **main.tex updated**:
+  abstract, E4 discussion, and the "reconciling headline claim" paragraph now state this directly
+  instead of leaving it as an open lead. Code: `run_e4_tau_sweep.py`. Results: `e4_tau_sweep.json`.
+  Full detail: memory `project_sgf_e4_tau_sweep.md`.
 - **Phase 7 (E5 robustness):** DONE. Objective: SFS stability across alpha, ruler orientation
   (horizontal vs vertical), and prompt phrasing. Scoped to 2 representative clips
   (water.mp4/02182026, 0.08cg2.mp4/05052026) x alpha in {0.25, 0.5, 2, 4} x orientation

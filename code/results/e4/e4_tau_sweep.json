@@ -1,0 +1,462 @@
+{
+  "Qwen2.5-VL-7B-Instruct": {
+    "label": "Qwen2.5-VL-7B-Instruct",
+    "n": 36,
+    "sfs_avg_mean": 0.11904038843019604,
+    "rows": [
+      {
+        "tau": 0.1,
+        "acc_at_tau": 0.0,
+        "acc_ci95": [
+          0.0,
+          0.0
+        ],
+        "n_hits": 0,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": NaN,
+        "r_ci95": [
+          NaN,
+          NaN
+        ],
+        "status": "DEGENERATE"
+      },
+      {
+        "tau": 0.15,
+        "acc_at_tau": 0.0,
+        "acc_ci95": [
+          0.0,
+          0.0
+        ],
+        "n_hits": 0,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": NaN,
+        "r_ci95": [
+          NaN,
+          NaN
+        ],
+        "status": "DEGENERATE"
+      },
+      {
+        "tau": 0.2,
+        "acc_at_tau": 0.0,
+        "acc_ci95": [
+          0.0,
+          0.0
+        ],
+        "n_hits": 0,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": NaN,
+        "r_ci95": [
+          NaN,
+          NaN
+        ],
+        "status": "DEGENERATE"
+      },
+      {
+        "tau": 0.25,
+        "acc_at_tau": 0.0,
+        "acc_ci95": [
+          0.0,
+          0.0
+        ],
+        "n_hits": 0,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": NaN,
+        "r_ci95": [
+          NaN,
+          NaN
+        ],
+        "status": "DEGENERATE"
+      },
+      {
+        "tau": 0.3,
+        "acc_at_tau": 0.027777777777777776,
+        "acc_ci95": [
+          0.0,
+          0.08333333333333333
+        ],
+        "n_hits": 1,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": 0.33932783892910356,
+        "r_ci95": [
+          0.27152288987518713,
+          0.623953823762044
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.4,
+        "acc_at_tau": 0.05555555555555555,
+        "acc_ci95": [
+          0.0,
+          0.1388888888888889
+        ],
+        "n_hits": 2,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": 0.14659013018259465,
+        "r_ci95": [
+          -0.2299818806018835,
+          0.5440176711944315
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.5,
+        "acc_at_tau": 0.1388888888888889,
+        "acc_ci95": [
+          0.027777777777777776,
+          0.25
+        ],
+        "n_hits": 5,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": 0.08734802226595191,
+        "r_ci95": [
+          -0.22910092116381264,
+          0.4334119418298267
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.75,
+        "acc_at_tau": 0.5,
+        "acc_ci95": [
+          0.3333333333333333,
+          0.6666666666666666
+        ],
+        "n_hits": 18,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": 0.07406618893190248,
+        "r_ci95": [
+          -0.24314322428270946,
+          0.4421250350884813
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 1.0,
+        "acc_at_tau": 0.5,
+        "acc_ci95": [
+          0.3333333333333333,
+          0.6666666666666666
+        ],
+        "n_hits": 18,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": 0.07406618893190248,
+        "r_ci95": [
+          -0.24314322428270946,
+          0.4421250350884813
+        ],
+        "status": "ok"
+      }
+    ],
+    "first_computable_tau": 0.3
+  },
+  "gemini-2.5-flash-lite": {
+    "label": "gemini-2.5-flash-lite",
+    "n": 36,
+    "sfs_avg_mean": 0.05582923489835329,
+    "rows": [
+      {
+        "tau": 0.1,
+        "acc_at_tau": 0.0,
+        "acc_ci95": [
+          0.0,
+          0.0
+        ],
+        "n_hits": 0,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": NaN,
+        "r_ci95": [
+          NaN,
+          NaN
+        ],
+        "status": "DEGENERATE"
+      },
+      {
+        "tau": 0.15,
+        "acc_at_tau": 0.05555555555555555,
+        "acc_ci95": [
+          0.0,
+          0.1388888888888889
+        ],
+        "n_hits": 2,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": -0.15386223125638127,
+        "r_ci95": [
+          -0.26379482301243456,
+          -0.0947045763407123
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.2,
+        "acc_at_tau": 0.05555555555555555,
+        "acc_ci95": [
+          0.0,
+          0.1388888888888889
+        ],
+        "n_hits": 2,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": -0.15386223125638127,
+        "r_ci95": [
+          -0.26379482301243456,
+          -0.0947045763407123
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.25,
+        "acc_at_tau": 0.25,
+        "acc_ci95": [
+          0.1111111111111111,
+          0.3888888888888889
+        ],
+        "n_hits": 9,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": -0.32998761292310663,
+        "r_ci95": [
+          -0.463751752869577,
+          -0.19924714739504984
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.3,
+        "acc_at_tau": 0.3333333333333333,
+        "acc_ci95": [
+          0.19444444444444445,
+          0.5
+        ],
+        "n_hits": 12,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": -0.4152583860234186,
+        "r_ci95": [
+          -0.5488565771287055,
+          -0.29336485522518146
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.4,
+        "acc_at_tau": 0.4166666666666667,
+        "acc_ci95": [
+          0.25,
+          0.5833333333333334
+        ],
+        "n_hits": 15,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": -0.3263679554068929,
+        "r_ci95": [
+          -0.525691119735858,
+          -0.05750225697138219
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.5,
+        "acc_at_tau": 0.4166666666666667,
+        "acc_ci95": [
+          0.25,
+          0.5833333333333334
+        ],
+        "n_hits": 15,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": -0.3263679554068929,
+        "r_ci95": [
+          -0.525691119735858,
+          -0.05750225697138219
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.75,
+        "acc_at_tau": 0.5,
+        "acc_ci95": [
+          0.3333333333333333,
+          0.6666666666666666
+        ],
+        "n_hits": 18,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": -0.4275348490164205,
+        "r_ci95": [
+          -0.6198490186111824,
+          -0.17979971526357738
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 1.0,
+        "acc_at_tau": 0.5,
+        "acc_ci95": [
+          0.3333333333333333,
+          0.6666666666666666
+        ],
+        "n_hits": 18,
+        "n": 36,
+        "pearson_r_acc_vs_sfs": -0.4275348490164205,
+        "r_ci95": [
+          -0.6198490186111824,
+          -0.17979971526357738
+        ],
+        "status": "ok"
+      }
+    ],
+    "first_computable_tau": 0.15,
+    "acc30_hit_session_breakdown": {
+      "05052026": 12
+    },
+    "acc30_confound_note": "All Acc@30% 'hits' for gemini come from a single session (05052026), whose true velocities (~1.1-1.2 m/s) happen to cluster near gemini's favorite near-constant output (~1.4-1.5 m/s). This is the same near-constant-response palette issue documented in project_sgf_e2_finding.md / e4_multimodel_decoupling.json, not evidence of broader measurement ability. The negative tau-sweep correlation should NOT be reported as a clean decoupling/coupling signal for this reason."
+  },
+  "pooled": {
+    "label": "pooled (n=72)",
+    "n": 72,
+    "sfs_avg_mean": 0.08743481166427466,
+    "rows": [
+      {
+        "tau": 0.1,
+        "acc_at_tau": 0.0,
+        "acc_ci95": [
+          0.0,
+          0.0
+        ],
+        "n_hits": 0,
+        "n": 72,
+        "pearson_r_acc_vs_sfs": NaN,
+        "r_ci95": [
+          NaN,
+          NaN
+        ],
+        "status": "DEGENERATE"
+      },
+      {
+        "tau": 0.15,
+        "acc_at_tau": 0.027777777777777776,
+        "acc_ci95": [
+          0.0,
+          0.06944444444444445
+        ],
+        "n_hits": 2,
+        "n": 72,
+        "pearson_r_acc_vs_sfs": -0.1169171534299521,
+        "r_ci95": [
+          -0.19589784257304074,
+          -0.07181693147091822
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.2,
+        "acc_at_tau": 0.027777777777777776,
+        "acc_ci95": [
+          0.0,
+          0.06944444444444445
+        ],
+        "n_hits": 2,
+        "n": 72,
+        "pearson_r_acc_vs_sfs": -0.1169171534299521,
+        "r_ci95": [
+          -0.19589784257304074,
+          -0.07181693147091822
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.25,
+        "acc_at_tau": 0.125,
+        "acc_ci95": [
+          0.05555555555555555,
+          0.20833333333333334
+        ],
+        "n_hits": 9,
+        "n": 72,
+        "pearson_r_acc_vs_sfs": -0.24490042954459365,
+        "r_ci95": [
+          -0.3387103093925764,
+          -0.14860334767914307
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.3,
+        "acc_at_tau": 0.18055555555555555,
+        "acc_ci95": [
+          0.09722222222222222,
+          0.2777777777777778
+        ],
+        "n_hits": 13,
+        "n": 72,
+        "pearson_r_acc_vs_sfs": -0.1909935511584242,
+        "r_ci95": [
+          -0.36512142499319344,
+          0.04908730291906646
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.4,
+        "acc_at_tau": 0.2361111111111111,
+        "acc_ci95": [
+          0.1388888888888889,
+          0.3333333333333333
+        ],
+        "n_hits": 17,
+        "n": 72,
+        "pearson_r_acc_vs_sfs": -0.19156967079338844,
+        "r_ci95": [
+          -0.37147748430460803,
+          0.033248455136809116
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.5,
+        "acc_at_tau": 0.2777777777777778,
+        "acc_ci95": [
+          0.18055555555555555,
+          0.3888888888888889
+        ],
+        "n_hits": 20,
+        "n": 72,
+        "pearson_r_acc_vs_sfs": -0.16281900515406883,
+        "r_ci95": [
+          -0.3487059254361379,
+          0.05609521145781335
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 0.75,
+        "acc_at_tau": 0.5,
+        "acc_ci95": [
+          0.3888888888888889,
+          0.6111111111111112
+        ],
+        "n_hits": 36,
+        "n": 72,
+        "pearson_r_acc_vs_sfs": -0.10515881410821407,
+        "r_ci95": [
+          -0.31287845664334357,
+          0.13541663210012678
+        ],
+        "status": "ok"
+      },
+      {
+        "tau": 1.0,
+        "acc_at_tau": 0.5,
+        "acc_ci95": [
+          0.3888888888888889,
+          0.6111111111111112
+        ],
+        "n_hits": 36,
+        "n": 72,
+        "pearson_r_acc_vs_sfs": -0.10515881410821407,
+        "r_ci95": [
+          -0.31287845664334357,
+          0.13541663210012678
+        ],
+        "status": "ok"
+      }
+    ],
+    "first_computable_tau": 0.15
+  }
+}
