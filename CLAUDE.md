@@ -197,6 +197,19 @@ Rendered perturbed scale clips (alpha in {0.5, 2}) go in `/ephemeral/sgf_work/pe
   post-processing" paragraph; Limitations' E3 paragraph now states 8/12. Code:
   `enhance_e3_clips.py`, `run_e3_enhanced_retest.py`. Results: `fall_clips_enhanced/`,
   `e3_enhanced_retest_results.json`. Full detail: memory `project_sgf_e3_a2_enhancement.md`.
+  **UPDATE (2026-07-06), improvement plan B2: root-caused E2's calibration-grounding (CG) session
+  asymmetry (Qwen CG=0.0 on 05052026 vs 0.44 on 02182026) — CONFIRMED DIFFERENT cause from E3's,
+  not the same one.** E3's cause was footage visibility; this is a task-comprehension error:
+  Qwen literally echoes the ruler's PRINTED NUMBER as its calibration answer instead of computing
+  tick spacing. Deterministic, not noisy: 18/18 base-condition 05052026 answers are exactly 30.0
+  or 3.0 (ruler prints "30", true answer always 1.0); at alpha=0.5 (relabeled "15"), 18/18 answers
+  are exactly 3.75=15/4. On 02182026 (ruler prints "12"), wrong answers are small plausible
+  mm-per-tick GUESSES (0.5/1.0) that sometimes coincidentally match the true value — a
+  qualitatively different error. Gemini shows a much smaller session gap (0.43 vs 0.38),
+  consistent with this being Qwen-specific label-echoing, not a footage property. **main.tex
+  updated**: new paragraph after the E2 table calling this "the clearest single illustration...
+  of the behavior SGF is designed to catch." Code: `analyze_b2_cg_asymmetry.py`. Full detail:
+  memory `project_sgf_b2_cg_asymmetry.md`.
 - **Phase 6 (E4 decoupling analysis):** DONE, with an important caveat. Runbook objective:
   correlate per-item Acc@10% with per-item SFS across E2's 36 (clip x seed) items.
   **The literal question is unanswerable at the 10% threshold** — Acc@10%_hit is 0 for all 36/36
@@ -270,6 +283,23 @@ Rendered perturbed scale clips (alpha in {0.5, 2}) go in `/ephemeral/sgf_work/pe
   their own targets. Do NOT report the alpha spread as "more faithful under strong perturbation."
   Code: `/ephemeral/sgf_work/model_outputs/run_e5_batch.py` + `run_e5_analysis.py`. Results:
   `/ephemeral/sgf_work/results/e5/e5_qwen_results.json` + `e5_stability_table.json`.
+  **UPDATE (2026-07-06), improvement plan B1: broadened E5 from 2 to all 12 E2 clips (360 calls,
+  zero new API cost, local Qwen only).** Overall SFS (0.184) and CG (0.132) closely matched the
+  2-clip sample, and orientation/seed stability held up on 6x more data. **But revealed a new,
+  much bigger instability axis unavailable with only 2 clips: SFS by session ranges from 0.058
+  (all six 02182026 clips, IDENTICAL value, not just similar) to 0.311 (all six 05052026 clips) —
+  range 0.253, bigger than the already-flagged alpha=4 artifact.** Root cause confirmed directly:
+  02182026 outputs 1.5 m/s in 34-36/36 items at EVERY alpha tested (essentially zero response to
+  any perturbation strength, mechanically flooring its SFS); 05052026 shows more incidental spread
+  under perturbation that coincidentally scores higher, not genuine faithfulness — same
+  "near-constant-palette landing near a target by luck" phenomenon as the alpha artifact, now
+  clip/session-dependent instead of alpha-dependent. Does NOT contradict the orientation/seed
+  stability findings (still real, strengthened by more data) but shows clip/session choice
+  matters more than any condition tested. **main.tex updated**: E5 discussion gets a new
+  "broadened to all 12 clips" paragraph, Table 4 gets a new session row, Limitations' dataset-
+  scale paragraph now cites this finding. Code: `run_e5_batch_b1_full12.py`,
+  `run_e5_analysis_full12.py`. Results: `e5_qwen_results_full12.json`,
+  `e5_stability_table_full12.json`. Full detail: memory `project_sgf_b1_full12_e5.md`.
 - **Phase 8 (write-up):** DONE. Reconciled every `\torun{}`/`\result{}` placeholder in `main.tex`
   with the real E1-E5 numbers. **Key framing decision (user-approved)**: reframed from the
   originally hypothesized "decoupled" headline to an honest single-model null-result narrative —

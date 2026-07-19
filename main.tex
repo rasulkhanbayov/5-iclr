@@ -690,6 +690,32 @@ models diverge sharply -- see the E4 discussion below.}
 \label{tab:e2}
 \end{center}
 
+\paragraph{A concrete, deterministic example of ungrounded calibration: label
+echoing.} Table~\ref{tab:e2}'s $\cg$ row hides a large, previously unexplained
+asymmetry: Qwen's calibration-grounding is $0.444$ on one ruler-target session
+but exactly $0.000$ on the other. We traced this to a distinct failure mode
+from E3's (which was a footage-visibility issue) -- this one is a
+task-comprehension error specific to how the failing session's ruler is
+labeled. Qwen answers the calibration question by echoing the ruler's
+\emph{printed number} rather than reasoning about tick spacing: asked for the
+mm-per-tick of a ruler printed ``30'' (true answer, every session: $1.0$), it
+answers $30.0$ or $3.0$ in 18/18 items; when that same ruler is relabeled
+``15'' under $\alpha{=}0.5$ (true answer: $0.5$), it answers $3.75 = 15/4$ in
+18/18 items -- a fixed transform of the printed digit, not the correct value,
+and not noise. On the other session (ruler printed ``12''), Qwen's wrong
+answers are qualitatively different: small, plausible mm-per-tick
+\emph{guesses} ($0.5$ or $1.0$) that sometimes coincidentally match the true
+answer by luck, not an echo of ``12'' itself. Gemini shows a much smaller
+session gap on the identical two rulers ($0.426$ vs.\ $0.380$ overall,
+Table~\ref{tab:e2}), consistent with label-echoing being a Qwen-specific
+misreading tendency rather than a property of the footage -- unlike E3's
+cause, which would be expected to affect any model similarly since it concerns
+what is visible in the video, not how a specific model processes printed
+digits. We highlight this as the clearest single illustration in our results
+of the behavior SGF is designed to catch: a model producing a number that
+is legible, confident, and completely disconnected from the physical
+quantity it was asked to compute.
+
 \paragraph{E3: a genuine but partial faithfulness signal, and a session-specific
 confound we root-caused rather than papered over.} After the control-question
 redesign, $\hph = 0$ on the 7 of 12 items where the model answered the control
@@ -779,18 +805,44 @@ an unexamined lead: loosening the tolerance does not rescue the decoupling
 analysis on these two models, and the honest conclusion is that decoupling
 remains untested, not weakly supported, at every tolerance we could compute.
 
-\paragraph{E5: real robustness on two axes, and a third axis's apparent
-instability is itself an artifact worth naming.} SFS is stable across ruler
-orientation (original 0.209 vs.\ rotated 0.162, range 0.046) and across the
-three prompt seeds (range 0.087) -- genuine evidence the low SFS in E2 is not
-an artifact of one ruler orientation or one prompt phrasing. SFS \emph{appears}
-unstable across $\alpha$ (range 0.331, spiking to 0.396 at $\alpha{=}4$), but we
-traced this to the same fixed-value-palette behavior as E2/E4: at
-$\alpha{=}4$ specifically, every item in the sweep (both clips, both
-orientations, all three seeds) happened to report the identical
-(base, scaled) pair, a content-independent ratio that coincidentally sits near
-that $\alpha$'s ideal target and scores well by chance. We report this
-explicitly rather than let the highest number in the table stand uncontextualized.
+\paragraph{E5: real robustness on two axes, a third axis's apparent instability
+is itself an artifact, and a fourth, broader sweep finds the biggest axis of
+all.} SFS is stable across ruler orientation (original 0.209 vs.\ rotated
+0.162, range 0.046) and across the three prompt seeds (range 0.087) --
+genuine evidence the low SFS in E2 is not an artifact of one ruler orientation
+or one prompt phrasing. SFS \emph{appears} unstable across $\alpha$ (range
+0.331, spiking to 0.396 at $\alpha{=}4$), but we traced this to the same
+fixed-value-palette behavior as E2/E4: at $\alpha{=}4$ specifically, every item
+in the sweep (both clips, both orientations, all three seeds) happened to
+report the identical (base, scaled) pair, a content-independent ratio that
+coincidentally sits near that $\alpha$'s ideal target and scores well by
+chance. We report this explicitly rather than let the highest number in the
+table stand uncontextualized.
+
+\noindent\textbf{Broadened to all 12 clips (360 items, zero additional API
+cost): orientation and seed stability confirmed, but clip/session choice is
+the largest axis of variation we tested.} The above used 2 representative
+clips by design (E5 tests condition stability, not item coverage, which E2
+already provides). We reran the full condition grid on all 12 E2 clips to
+check whether that scoping choice mattered. It mostly did not: overall SFS
+(0.184) and CG (0.132) closely match the 2-clip sample, and orientation/seed
+stability hold up on 6$\times$ more data. But a new axis unavailable with only
+2 clips reveals the largest source of variation found in any part of this
+study: SFS by session ranges from $0.058$ (95\% CI $[0.028,0.093]$, all six
+02182026 clips) to $0.311$ (95\% CI $[0.256,0.366]$, all six 05052026 clips) --
+a range of $0.253$, larger than the already-flagged $\alpha$ artifact. Every
+single 02182026 clip scores an \emph{identical} $0.058$, not merely similar
+values. We traced this to the same underlying cause as the $\alpha{=}4$
+artifact, now clip-dependent rather than alpha-dependent: 02182026 reports
+$1.5\,\mathrm{m/s}$ in 34--36 of 36 items at \emph{every} $\alpha$ we tested,
+essentially zero response to any perturbation strength, which mechanically
+floors its SFS; 05052026 shows more incidental spread under perturbation,
+which coincidentally scores higher without reflecting genuine faithfulness.
+This does not contradict the orientation/seed stability findings -- those
+remain real and are strengthened by the larger sample -- but it shows that
+which clips a robustness sweep happens to sample matters more than the
+conditions varied within them, a caveat the original 2-clip scoping could not
+surface on its own.
 
 \begin{center}
 \small
@@ -809,12 +861,17 @@ explicitly rather than let the highest number in the table stand uncontextualize
                               & 0.5 & 0.065 & [0.000, 0.194] \\
                               & 2   & 0.138 & [0.035, 0.242] \\
                               & 4   & 0.396$^\dagger$ & [0.198, 0.594] \\
+\addlinespace
+\multirow{2}{*}{Session (12-clip sweep, see text)} & 02182026 & 0.058 & [0.028, 0.093] \\
+                              & 05052026 & 0.311 & [0.256, 0.366] \\
 \bottomrule
 \end{tabular}
 \captionof{table}{\textbf{E5 robustness sweep.} Orientation and prompt-seed
 axes show genuine, small spread. $^\dagger$The $\alpha{=}4$ value is a
 coincidental artifact of a fixed output palette (see text), not a real
-alpha-dependent faithfulness effect.}
+alpha-dependent faithfulness effect. The session row (from the separate
+12-clip broadening) shows the largest spread of any axis tested, for the
+same underlying reason as the $\alpha{=}4$ artifact.}
 \label{tab:e5}
 \end{center}
 
@@ -893,6 +950,15 @@ phenomenon, further narrowed from five recorded sessions to three after
 verification (Section~\ref{sec:data}), and model evaluation used a 12-clip
 subset of those three. Breadth across phenomena and larger item counts are
 future work; the protocol is designed to enable both without modification.
+This narrowness has a measurable cost we did not anticipate at design time:
+E5's 12-clip broadening (Section~\ref{sec:results}) found session choice is
+the single largest source of $\sfs$ variation in our entire study (range
+$0.253$, larger than any perturbation or prompting axis we tested), because
+each of our two ruler-target sessions happens to elicit a different
+near-constant output from the model. A dataset spanning more sessions and
+phenomena would likely average out this session-level idiosyncrasy; ours
+cannot, and per-session numbers in this paper should be read with that in
+mind.
 
 \noindent\textbf{A session-specific engagement confound in E3, partially but
 not fully fixable.} Five of twelve E3 items originally could not be scored
