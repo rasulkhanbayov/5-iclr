@@ -18,3 +18,6 @@ sgf_submission.zip
 
 # Local Claude Code session state, not project content
 .claude/
+
+# Secrets -- never commit
+.env
