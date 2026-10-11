@@ -1,21 +1,23 @@
 import os
-os.environ.setdefault("HF_HOME", "/ephemeral/sgf_work/hf_cache")
+os.environ.setdefault("HF_HOME", os.path.join(os.path.expanduser("~"), "sgf_hf_cache"))
 
 import sys
 import json
 import time
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
-sys.path.insert(0, "/ephemeral/sgf_work/model_outputs")
+sys.path.insert(0, os.path.join(sgf_paths.CODE_DIR, "model_outputs"))
 
 from run_qwen_inference import query_hidden_prior
 
-FALL_CLIP_DIR = "/ephemeral/sgf_work/model_outputs/fall_clips"
-OUT_PATH = "/ephemeral/sgf_work/results/e3/e3_qwen_results.json"
+FALL_CLIP_DIR = sgf_paths.FALL_CLIP_DIR
+OUT_PATH = os.path.join(sgf_paths.RESULTS_DIR, "e3", "e3_qwen_results.json")
 os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
 
 
 def main():
-    with open("/ephemeral/sgf_work/model_outputs/e2_selected_clips.json") as f:
+    with open(sgf_paths.MANIFEST_PATH) as f:
         clips = json.load(f)
 
     results = []

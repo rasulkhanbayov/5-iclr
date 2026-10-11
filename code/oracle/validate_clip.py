@@ -1,5 +1,7 @@
+# Usage: python3 code/oracle/validate_clip.py <video.mp4> <session, e.g. 02182026>
+import os
 import sys
-sys.path.insert(0, '.')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from droplet_oracle import track_droplet, TRUE_FPS
 import numpy as np
 import time

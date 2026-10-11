@@ -18,11 +18,14 @@ calls -- this is purely a recompute over already-collected E2 responses).
 import sys
 import json
 import numpy as np
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
-sys.path.insert(0, "/home/ubuntu/5-ICLR (work with Dr. Mariam)")
+sys.path.insert(0, sgf_paths.REPO_ROOT)
 from sgf_metrics import scale_faithfulness_score, acc_at_tau, bootstrap_ci
 
-OUT_PATH = "/ephemeral/sgf_work/results/e4/e4_tau_sweep.json"
+OUT_PATH = os.path.join(sgf_paths.RESULTS_DIR, "e4", "e4_tau_sweep.json")
 
 TAUS = [0.10, 0.15, 0.20, 0.25, 0.30, 0.40, 0.50, 0.75, 1.00]
 
@@ -97,8 +100,8 @@ def sweep_for(items, label):
 
 
 def main():
-    qwen_items = load_triples("/ephemeral/sgf_work/results/e2/e2_qwen_results.json", "Qwen2.5-VL-7B-Instruct")
-    gem_items = load_triples("/ephemeral/sgf_work/results/e2/e2_gemini_flash_lite_results.json", "gemini-2.5-flash-lite")
+    qwen_items = load_triples(os.path.join(sgf_paths.RESULTS_DIR, "e2", "e2_qwen_results.json"), "Qwen2.5-VL-7B-Instruct")
+    gem_items = load_triples(os.path.join(sgf_paths.RESULTS_DIR, "e2", "e2_gemini_flash_lite_results.json"), "gemini-2.5-flash-lite")
     pooled_items = qwen_items + gem_items
 
     results = {
@@ -115,7 +118,7 @@ def main():
     # Check whether gemini's Acc@tau "hits" concentrate in one session (same
     # near-constant-output palette issue as E2/E4/E5) -- if so the loosened-
     # tolerance correlation is still confounded, not a clean coupling signal.
-    gem_raw = json.load(open("/ephemeral/sgf_work/results/e2/e2_gemini_flash_lite_results.json"))
+    gem_raw = json.load(open(os.path.join(sgf_paths.RESULTS_DIR, "e2", "e2_gemini_flash_lite_results.json")))
     gem_base = [x for x in gem_raw if x["condition"] == "base"]
     from collections import Counter
     hit_sessions = Counter(x["session"] for x in gem_base

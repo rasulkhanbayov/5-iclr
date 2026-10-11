@@ -1,123 +1,189 @@
-# SGF: Student README
+# One Perturbation Is Not Enough
 
-This is your entry point. It explains, in plain terms, what the paper claims, how
-to build it, what to run, and what to do before submitting. The detailed
-experimental protocol lives in `sgf_runbook.txt`; this file points you there.
+Code, per-item model outputs and reconciliation for **"One Perturbation Is Not
+Enough: Identifiability and Blind Baselines for Behavioral AI Evaluation"**
+(AAAI-27 Alignment Track).
 
-## 1. What the paper claims and why it matters
+Rasul Khanbayov, Mariam Sohail, Ahmed Abdala, Hasan Kurban
 
-**One sentence:** existing benchmarks check whether a vision-language model (VLM)
-reports the *right number* for a physical quantity from video, but a model can
-get the right number for the *wrong reason* (guessing a plausible value instead
-of reading the in-frame ruler), and we give a label-free way to tell the
-difference.
+> New here? [INDEX.md](INDEX.md) maps every file to what it does and which
+> paper result it produces.
 
-**The gap.** Benchmarks like QuantiPhy, IRIS, and PhysicsMind score the predicted
-number against ground truth. None checks whether that number is actually anchored
-to the visual scale reference. A model that always says "about 1 m/s" will look
-good whenever the true answer is near 1 m/s, even though it never measured
-anything. Recent faithfulness work (step-level visual grounding faithfulness,
-cross-modal synergy) already argues faithfulness is a separate axis from
-accuracy, so we build on that consensus; our one change is that our perturbation
-(relabeling the in-frame scale) has an EXACTLY KNOWN correct answer, so we need no human
-raters or judge model. Note: a May 2026 paper, PRISM-VL, also says
-"measurement-grounded" but means something different (feeding RAW sensor data and
-training a model); we cite and disambiguate it in the paper. Re-check both lines
-on arXiv before you submit.
+## What this is
 
-**The contribution (the delta over the closest work).** We introduce
-**Scale-Grounded Faithfulness (SGF)**: we relabel the in-frame scale so the true
-calibration changes by a known factor alpha (we change what the scale asserts,
-e.g. swap in a ruler of a different known length, leaving the object's pixel
-motion unchanged) and check whether the model's reported velocity changes by
-alpha**d, as a real measurer's would. (Do NOT uniformly resample the whole frame
-with the ruler's asserted length fixed; that is inert.) Because the correct response is known by
-simple arithmetic (Proposition 1 in the paper), we can score faithfulness
-**without any human annotation**. We add two more diagnostics: a
-calibration-grounding check (did it read the ruler right, separately from getting
-the number right?) and a hidden-prior trap (does it hallucinate the off-frame 6.6
-cm drop height instead of declining?). Droplets are our first testbed; the
-protocol works for any video with a ruler in frame.
+A behavioral evaluation perturbs an input and reads the induced change in a
+model's output to certify that the model uses that input. This repo
+implements and evaluates a perturbation-based test of whether
+vision-language models (VLMs) actually ground a physical-quantity estimate (a
+droplet's pre-impact velocity, from high-speed video) in an in-frame
+calibration reference (a ruler), rather than reporting a plausible number
+regardless of what the reference shows.
 
-**Why this is the strongest publishable cut of your data.** Your droplet videos
-alone are too narrow to be "a benchmark" for a top venue, and a generic
-"VLMs-estimate-velocity" benchmark is already taken (see the paper's Table 1). But
-your data has three things those benchmarks lack and need: an in-frame scale bar,
-a known-but-off-frame quantity (the 6.6 cm height) that makes a perfect
-hallucination trap, and an exact classical-CV oracle. That combination is exactly
-what the SGF protocol needs. So we make the *protocol* the contribution and your
-data its first instantiation.
+Three models are evaluated on 27 clips under three perturbation relations:
+relabeling the ruler ($R_\alpha$), resampling the whole frame ($S_s$) and
+relabeling the frame rate ($T_\beta$), plus an instructed-constant control and
+a text-calibration positive control.
 
-## 2. How to read and build the paper
+| Model | Where it ran |
+|---|---|
+| Qwen2.5-VL-7B-Instruct | local, 1x A100 80GB |
+| Qwen3-VL-30B-A3B-Instruct | local, 1x H200 |
+| Gemini 3.1 Pro Preview | OpenRouter API |
 
-Files:
-- `main.tex`  — the paper.
-- `sgf.bib`   — references (fill in the `% VERIFY` author lists).
-- `main.bbl`  — precompiled references, so one pdflatex pass works even without bibtex.
-- `main.pdf`  — the built paper.
+## Quick start: reproduce the paper's numbers (CPU, seconds, no data download)
 
-Build (full):
+```bash
+git clone https://github.com/rasulkhanbayov/5-iclr.git && cd 5-iclr
+pip install numpy==2.2.6
+
+python3 reconcile.py      # recompute every Table 1 / Appendix B.3 number from the
+                          # raw per-item outputs; prints MATCH/MISMATCH per cell
+python3 sgf_metrics.py    # smoke test: every arithmetic identity / closed-form
+                          # bound in the theory section
 ```
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
+
+`reconcile.py` ends with `ALL CHECKS PASSED` (65 checks). To rebuild its
+input CSV from the per-item JSONs first:
+
+```bash
+python3 code/model_outputs/rescore_calibration_fix.py   # *_rescored.json (calibration fix)
+python3 build_repro_csv.py                              # results/repro_raw_outputs.csv
+python3 reconcile.py
 ```
-For ACL/ARR or NeurIPS D&B submission, drop the official style files into this
-folder and switch the `\documentclass` line as noted at the top of `main.tex`.
 
-Where each claim lives: the reframing is in the Introduction; the protocol and
-Proposition 1 are in Section 3; the dataset in Section 4; every experiment to run
-is in Section 5 (the red `>>> TO RUN` tags) and the results placeholders are blue.
+Both steps regenerate the committed files byte-for-byte.
 
-## 3. The experiments
+## Full pipeline: rerun from raw video
 
-Read `sgf_runbook.txt`. **Do E1 (the positive control) first** — it confirms the
-metric and oracle work before you spend any API budget. Then E2 (main table), E3
-(hallucination trap), E4 (the decoupling analysis, your headline), E5 (robustness).
+### 1. Environment
 
-What "promising" looks like: models with high accuracy but low SFS — that is the
-finding that accuracy and faithfulness are decoupled, which is the interesting,
-citable result. What "negative" looks like: accuracy and SFS move together — then
-honestly reframe the paper as showing that, on this testbed, number-accuracy does
-track grounding. Either way, **reconcile the abstract and intro to what you
-actually measure.**
-
-## 4. The code
-
-`sgf_metrics.py` (numpy only) implements every quantity in the paper: SFS,
-calibration grounding, hidden-prior rate, bootstrap CIs, paired sign test.
-
-Run the smoke test:
+```bash
+bash slurm_jobs/00_setup_env.sh        # conda env "sgf", Python 3.10, pinned versions
+# or manually:
+pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
+pip install -r requirements.txt
 ```
-python3 sgf_metrics.py
+
+Paper runs used Ubuntu 22.04, `torch 2.6.0+cu124`, `transformers 5.15.0`,
+`qwen-vl-utils 0.0.14`. The model checkpoint revisions are pinned in code
+(Qwen2.5-VL `cc594898…`, Qwen3-VL `9c4b90e1…`; see Appendix B.4).
+
+For Gemini: `export OPENROUTER_API_KEY=...` (see [.env.example](.env.example)).
+No key is stored in this repo.
+
+### 2. Data
+
+Videos are on Hugging Face at
+[huggingface.co/datasets/rasulkhanbayov/sgf](https://huggingface.co/datasets/rasulkhanbayov/sgf), not in git:
+
+```bash
+python scripts/download_data.py          # derived clips, ~150 MB: enough to rerun all model inference
+python scripts/download_data.py --raw    # + raw 02182026 session, ~4.4 GB: oracle, clip extraction, rendering
 ```
-It uses *synthetic* model behaviors (not real results) to show the metric
-separates a faithful measurer (SFS near 1) from a prior-driven guesser (SFS near
-0). For the real analysis, replace the synthetic arrays with your oracle's
-measurements and each model's reported numbers.
 
-## 5. Integrity and next-steps checklist (do all of these)
+Files land in `data/` (git-ignored). Override locations with `SGF_DATA_DIR`,
+`SGF_RAW_VIDEO_DIR`, `SGF_RESULTS_DIR`; all paths are defined in
+[code/sgf_paths.py](code/sgf_paths.py).
 
-- [ ] Re-confirm novelty on arXiv the week before submission; resolve the
-      `[UNVERIFIED]` flag in Table 1 of the paper.
-- [ ] Fill every `% VERIFY` citation in `sgf.bib` with the real author list. Never
-      invent author names.
-- [ ] Have a human author independently verify Proposition 1 and its proof, and
-      confirm the calibration-degree `d` for each quantity.
-- [ ] Run the experiments; replace every `[RESULT PLACEHOLDER]` and delete every
-      `>>> TO RUN` tag with real numbers.
-- [ ] If results are weaker than hoped, walk back the framing honestly.
-- [ ] Get 2-3 independent human mock reviews and resolve every issue. This is the
-      single highest-value step before submission.
-- [ ] You are the only authors. The AI assistant drafted; you verify and own
-      everything. Check your venue's current AI-use disclosure policy and comply.
+### 3. Run
 
-## 6. Honest expectation setting
+Each step's output already exists in `results/` or `data/derived/`, so you
+can start at any step.
 
-This process maximizes the probability the research deserves; it cannot guarantee
-acceptance. Top venues reject most submissions and reviewing is noisy. The
-dominant factor will be whether your experiments come back strong and survive
-expert scrutiny — especially E1 (does the metric hold up) and E4 (is the
-decoupling real). Get those right and this is a genuinely competitive D&B
-submission. Until the numbers exist, the draft is "complete pending validation."
+```bash
+# (a) ground truth + clip selection (CPU, needs --raw)
+python3 code/oracle/run_batch.py                    # -> results/oracle/oracle_batch_results.json
+python3 code/model_outputs/build_e2_manifest.py     # -> results/e2_selected_clips.json (27 clips)
+
+# (b) perturbed inputs (CPU, needs --raw; or use the downloaded derived clips)
+python3 code/perturbation/render_conditions.py      # -> data/derived/{perturbed,resampled,fall}_clips
+python3 code/model_outputs/trim_scale_clips.py      # -> data/derived/trimmed_scale_clips
+
+# (c) model inference: Slurm (pass your own partition/account/QOS), from repo root
+sbatch -p <partition> -A <account> slurm_jobs/01_e2_qwen7b.sh
+#   ... see the table below; Gemini runs are plain python (API)
+
+# (d) rescore, rebuild, reconcile
+python3 code/model_outputs/rescore_calibration_fix.py
+python3 build_repro_csv.py
+python3 reconcile.py
+```
+
+| Paper result | Qwen2.5-VL-7B (A100) | Qwen3-VL-30B (H200) | Gemini 3.1 Pro (API) | Output |
+|---|---|---|---|---|
+| Main evaluation $R_\alpha$ (Table 1: CG, $r_R$, Acc@τ) | `slurm_jobs/01_e2_qwen7b.sh` | `04_x1_qwen3vl30b_H200.sh` | `run_e2_batch_frontier.py` | `results/e2/` |
+| Resampling control $S_s$ (Table 1: $r_S$) | `02_x4_resampling_qwen7b.sh` | `05_x4_qwen3vl30b_H200.sh` | `run_x4_resampling_frontier.py` | `results/e4_resampling/` |
+| Temporal relabeling $T_\beta$ (Table 1: $r_T$) | `07_temporal_relabeling_qwen7b.sh` | not run | not run | `results/e2/temporal_qwen_results.json` |
+| Instructed-constant control (Table 1) | `03_x10_instructed_constant_qwen7b.sh` | `06_x10_qwen3vl30b_H200.sh` | `run_x10_instructed_constant_frontier.py` | `results/x10/` |
+| Text-calibration positive control (main text, App. B.3) | `08_t1_textcal_qwen7b.sh` | `09_t1_textcal_qwen3vl30b_H200.sh` | `MODEL=gemini python3 run_t1_textcal_{relabeling,resampling}.py` | `results/t1/` |
+| Legibility / temporal sufficiency check | `00_x2_legibility_qwen7b.sh` | n/a | n/a | `results/x2/` |
+
+Gemini scripts live in `code/model_outputs/`. Run them from anywhere:
+`python3 code/model_outputs/run_e2_batch_frontier.py`. Every batch runner
+resumes from its output file, so a killed job can simply be resubmitted.
+**Runtime:** each local-model job took roughly 25–45 min on one A100 80GB
+or H200 (model load included). Gemini spend was $20.85 in total across all
+experiments.
+
+## A calibration correction, and what it changed
+
+Partway through this project, the evaluation session's printed ruler was
+found to be graduated in 1/16 inch (1.5875 mm per tick), not the 1 mm
+originally assumed. This was confirmed by direct pixel measurement of its
+alternating long/short tick marks. A free-fall physics cross-check
+($v=\sqrt{2gh}$, whose prediction does not depend on the pixel calibration)
+corroborates it independently. The correction changes every quantity scored
+against the true calibration or the true oracle velocity. See the paper's
+Appendix B.2.
+
+- **Main evaluation and resampling control**: the prompt never stated the
+  calibration (the model reads the ruler video itself), so the raw responses
+  are unchanged and only the *scoring* changes.
+  `code/model_outputs/rescore_calibration_fix.py` writes
+  `results/e2/*_rescored.json` and `results/e4_resampling/*_rescored.json`
+  next to the originals; `_ORIGINAL`-suffixed fields keep the pre-fix values.
+  **`reconcile.py` and `build_repro_csv.py` read the `_rescored` files**, and
+  any new analysis should too.
+- **Temporal relabeling, instructed-constant control, text-calibration
+  positive control**: these state the calibration as text, so they were
+  rerun in full against the corrected value. `results/e2/temporal_qwen_results.json`,
+  `results/x10/` and `results/t1/` are post-correction. The pre-correction
+  files are kept in `results/pre_calibration_fix_backup/` for audit.
+- **Legibility check**: no rerun was needed, but the true-value field in
+  `results/x2/x2_results.json` was corrected, which reverses that check's
+  conclusion.
+
+The corrected constant is in `code/oracle/droplet_oracle.py`
+(`SESSION_CALIBRATION_PX_PER_MM`), `code/model_outputs/prompt_design.py`
+(`INSTRUCTED_CONSTANT_CALIBRATION_MM_PER_TICK`), and every batch runner that
+uses it (marked `# CORRECTED`).
+
+## A note on the CSV schema
+
+`results/repro_raw_outputs.csv` has a `family` column that distinguishes
+elicitations sharing the same `(clip_id, seed)` key but coming from
+different, independently run prompts. The main evaluation's "base"
+condition, temporal relabeling's text-based "base" and the positive
+control's text-based "base" are three distinct model responses to three
+different prompts on the same clip. Any analysis joining a perturbed row to
+"its" base row must match on `family` as well as `(model, clip_id, seed)`;
+otherwise it silently averages unrelated elicitations.
+
+## License
+
+Code: MIT, see [LICENSE](LICENSE). The video dataset on Hugging Face carries
+its own license (see its dataset card).
+
+## Citation
+
+```bibtex
+@inproceedings{khanbayov2027perturbation,
+  title     = {One Perturbation Is Not Enough: Identifiability and Blind Baselines for Behavioral AI Evaluation},
+  author    = {Khanbayov, Rasul and Sohail, Mariam and Abdala, Ahmed and Kurban, Hasan},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence (Alignment Track)},
+  year      = {2027},
+  note      = {arXiv:XXXX.XXXXX},
+}
+```
+
+<!-- TODO(authors): add the arXiv ID once assigned. -->

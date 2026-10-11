@@ -15,16 +15,28 @@ def _init_worker():
     cv2.setNumThreads(1)
 
 
-sys.path.insert(0, '.')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from droplet_oracle import track_droplet, link_primary_droplet, compute_pre_impact_velocity
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
+# Rebased from the previous GPU-server paths (that server no longer exists) to this
+# project's own layout, 2026-08-11.
+# 05052026 is NOT here: its footage was unavailable when this batch was
+# rerun (only 02182026, 03242026_particlesonlypreparedinsurfactant, and
+# 13.5cm_speed/{05112026,05122026,05172026} were). Per user decision, E2 model
+# evaluation proceeds on 02182026 alone at an expanded clip count; this oracle
+# batch still covers every valid session so all oracle data stays available for
+# other uses (e.g. new_videos/05122026's droplet clips, even though their
+# low_confidence flag means they were not selected for E2 -- see
+# build_e2_manifest.py).
+DATA_ROOT = sgf_paths.RAW_VIDEO_DIR
 SESSIONS = {
-    "02182026": "/ephemeral/videos/02182026",
-    "05052026": "/ephemeral/videos/05052026",
-    "new_videos/05122026": "/ephemeral/videos/new_videos/05122026",
+    "02182026": f"{DATA_ROOT}/02182026",
+    "new_videos/05122026": f"{DATA_ROOT}/13.5cm_speed/05122026",
 }
 
-OUT_DIR = "/ephemeral/sgf_work/oracle/results"
+OUT_DIR = os.path.join(sgf_paths.RESULTS_DIR, "oracle")
 os.makedirs(OUT_DIR, exist_ok=True)
 
 
@@ -42,7 +54,7 @@ def list_clips():
 def process_one(args):
     path, session_key = args
     t0 = time.time()
-    out = {"path": path, "session": session_key}
+    out = {"path": os.path.relpath(path, sgf_paths.RAW_VIDEO_DIR), "session": session_key}
     try:
         result = track_droplet(path, session_key)
         if "error" in result:
@@ -95,7 +107,8 @@ if __name__ == "__main__":
             try:
                 res = fut.result()
             except Exception as e:
-                res = {"path": path, "session": session_key, "error": f"worker crash: {e}"}
+                res = {"path": os.path.relpath(path, sgf_paths.RAW_VIDEO_DIR), "session": session_key,
+                       "error": f"worker crash: {e}"}
             results.append(res)
             status = "OK" if "error" not in res else f"ERROR: {res['error']}"
             v = res.get("velocity", {}).get("v_pre_impact_mps") if res.get("velocity") else None

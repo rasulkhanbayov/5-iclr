@@ -4,24 +4,33 @@ pairs. Elicits (i) the droplet's pre-impact velocity and (ii) the model's read
 of the scale calibration, per main.tex/sgf_runbook.txt's E2 spec.
 """
 import os
-os.environ.setdefault("HF_HOME", "/ephemeral/sgf_work/hf_cache")
+os.environ.setdefault("HF_HOME", os.path.join(os.path.expanduser("~"), "sgf_hf_cache"))
 
 import sys
-import re
 import json
 import time
 
-sys.path.insert(0, "/ephemeral/sgf_work/model_outputs")
-sys.path.insert(0, "/ephemeral/sgf_work/oracle")
+_CODE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(_CODE_DIR, "model_outputs"))
+sys.path.insert(0, os.path.join(_CODE_DIR, "oracle"))
 
 import torch
 from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
 from qwen_vl_utils import process_vision_info
 
 from prompt_design import (SYSTEM_PROMPT, USER_PROMPT_SEEDS, HIDDEN_PRIOR_PROMPT,
-                            HIDDEN_PRIOR_WITH_CONTROL_PROMPT)
+                            HIDDEN_PRIOR_WITH_CONTROL_PROMPT,
+                            INSTRUCTED_CONSTANT_SYSTEM_PROMPT,
+                            INSTRUCTED_CONSTANT_USER_PROMPT)
+from prompt_design_temporal import (TEMPORAL_SYSTEM_PROMPT, TEMPORAL_USER_PROMPT_SEEDS,
+                                     asserted_fps_for)
+from prompt_design_textcal import (TEXTCAL_SYSTEM_PROMPT_TEMPLATE, TEXTCAL_USER_PROMPT_SEEDS)
+from response_parsing import (parse_quantity_calibration, parse_hidden_prior,
+                               parse_hidden_prior_with_control, parse_velocity_only)
 
 MODEL_ID = "Qwen/Qwen2.5-VL-7B-Instruct"
+# Checkpoint revision used for the paper (Appendix B.4); override with SGF_QWEN25VL_REVISION.
+MODEL_REVISION = os.environ.get("SGF_QWEN25VL_REVISION", "cc594898137f460bfe9f0759e9844b3ce807cfb5")
 
 _model = None
 _processor = None
@@ -31,8 +40,8 @@ def load_model():
     global _model, _processor
     if _model is None:
         _model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-            MODEL_ID, torch_dtype="auto", device_map="cuda")
-        _processor = AutoProcessor.from_pretrained(MODEL_ID)
+            MODEL_ID, revision=MODEL_REVISION, torch_dtype="auto", device_map="cuda")
+        _processor = AutoProcessor.from_pretrained(MODEL_ID, revision=MODEL_REVISION)
     return _model, _processor
 
 
@@ -68,6 +77,104 @@ def query_quantity_and_calibration(droplet_clip_path, scale_clip_path, prompt_se
             {"type": "video", "video": f"file://{droplet_clip_path}", "fps": 15.0},
             {"type": "video", "video": f"file://{scale_clip_path}", "fps": 15.0},
             {"type": "text", "text": prompt},
+        ]},
+    ]
+    raw = _run_chat(messages)
+    return raw, parse_quantity_calibration(raw)
+
+
+def query_temporal_relabeling(droplet_clip_path, calibration_mm_per_tick, beta,
+                               prompt_seed_idx=0):
+    """
+    T_beta (temporal relabeling, appendix Section A.6's flagged analogue of
+    R_alpha): the droplet clip's actual frames/playback are unchanged --
+    only the ASSERTED frame rate in the prompt changes, from the true
+    ingestion rate (15.0 fps) to beta times that. Single video (no
+    scale-reference clip): the physical calibration is asserted directly in
+    text here too, since there is no in-frame frame-rate ruler to show a
+    relabeled version of the way R_alpha shows a relabeled scale video.
+    """
+    prompt_template = TEMPORAL_USER_PROMPT_SEEDS[prompt_seed_idx]
+    asserted_fps = asserted_fps_for(beta)
+    system_prompt = TEMPORAL_SYSTEM_PROMPT.format(asserted_fps=asserted_fps)
+    user_prompt = prompt_template.format(
+        asserted_fps=asserted_fps, calibration_mm_per_tick=calibration_mm_per_tick)
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": [
+            {"type": "video", "video": f"file://{droplet_clip_path}", "fps": 15.0},
+            {"type": "text", "text": user_prompt},
+        ]},
+    ]
+    raw = _run_chat(messages)
+    return raw, parse_velocity_only(raw)
+
+
+def query_textcal_relabeling(droplet_clip_path, true_calibration_mm_per_tick, alpha,
+                              prompt_seed_idx=0):
+    """
+    T1 (text-calibration positive control): R_alpha applied to a
+    policy given the true calibration as TEXT rather than asked to read a
+    scale-reference video, removing the perceptual step every evaluated
+    model has failed at while leaving the pixel-to-physical conversion step
+    intact. The droplet clip is the same UNCHANGED footage as every other
+    condition; only the asserted calibration in the prompt is relabeled by
+    alpha. No scale-reference video is shown.
+    """
+    prompt_template = TEXTCAL_USER_PROMPT_SEEDS[prompt_seed_idx]
+    asserted_cal = true_calibration_mm_per_tick * alpha
+    system_prompt = TEXTCAL_SYSTEM_PROMPT_TEMPLATE.format(calibration_mm_per_tick=asserted_cal)
+    user_prompt = prompt_template.format(calibration_mm_per_tick=asserted_cal)
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": [
+            {"type": "video", "video": f"file://{droplet_clip_path}", "fps": 15.0},
+            {"type": "text", "text": user_prompt},
+        ]},
+    ]
+    raw = _run_chat(messages)
+    return raw, parse_velocity_only(raw)
+
+
+def query_textcal_resampling(resampled_droplet_clip_path, true_calibration_mm_per_tick,
+                              prompt_seed_idx=0):
+    """
+    T1's S_s half: the frame is resampled (droplet clip resized by s, per
+    resample_renderer.py) while the asserted calibration in the TEXT is held
+    fixed at the true value -- mirroring the visual S_s condition's "ruler's
+    asserted physical length held fixed" invariant. No scale-reference video
+    is shown, consistent with query_textcal_relabeling.
+    """
+    prompt_template = TEXTCAL_USER_PROMPT_SEEDS[prompt_seed_idx]
+    system_prompt = TEXTCAL_SYSTEM_PROMPT_TEMPLATE.format(
+        calibration_mm_per_tick=true_calibration_mm_per_tick)
+    user_prompt = prompt_template.format(calibration_mm_per_tick=true_calibration_mm_per_tick)
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": [
+            {"type": "video", "video": f"file://{resampled_droplet_clip_path}", "fps": 15.0},
+            {"type": "text", "text": user_prompt},
+        ]},
+    ]
+    raw = _run_chat(messages)
+    return raw, parse_velocity_only(raw)
+
+
+def query_instructed_constant(droplet_clip_path, scale_clip_path):
+    """
+    X10 (runbook v3): identical call shape to query_quantity_and_calibration
+    (same two videos, same response format/parser) but with
+    INSTRUCTED_CONSTANT_SYSTEM_PROMPT in place of SYSTEM_PROMPT, instructing
+    the model to report a fixed answer regardless of video content. Single
+    condition, no prompt-seed variation (see prompt_design.py's
+    INSTRUCTED_CONSTANT_PROMPT_SEEDS docstring for why).
+    """
+    messages = [
+        {"role": "system", "content": INSTRUCTED_CONSTANT_SYSTEM_PROMPT},
+        {"role": "user", "content": [
+            {"type": "video", "video": f"file://{droplet_clip_path}", "fps": 15.0},
+            {"type": "video", "video": f"file://{scale_clip_path}", "fps": 15.0},
+            {"type": "text", "text": INSTRUCTED_CONSTANT_USER_PROMPT},
         ]},
     ]
     raw = _run_chat(messages)
@@ -111,60 +218,7 @@ def query_hidden_prior_with_control(droplet_clip_path):
     return raw, parse_hidden_prior_with_control(raw)
 
 
-def parse_quantity_calibration(raw_text):
-    cal_match = re.search(r"CALIBRATION_MM_PER_TICK:\s*([\d.]+)", raw_text)
-    vel_match = re.search(r"VELOCITY_MPS:\s*([\d.]+)", raw_text)
-    return {
-        "calibration_mm_per_tick": float(cal_match.group(1)) if cal_match else None,
-        "velocity_mps": float(vel_match.group(1)) if vel_match else None,
-        "parse_failed": cal_match is None or vel_match is None,
-    }
-
-
-def parse_hidden_prior(raw_text):
-    # Primary: exact requested format.
-    m = re.search(r"RELEASE_HEIGHT_CM:\s*(UNKNOWN|[\d.]+)", raw_text, re.IGNORECASE)
-    if m is not None:
-        val = m.group(1)
-        if val.upper() == "UNKNOWN":
-            return {"declined": True, "asserted_value_cm": None, "parse_failed": False}
-        return {"declined": False, "asserted_value_cm": float(val), "parse_failed": False}
-
-    # Fallback: model dropped the "RELEASE_HEIGHT_CM:" prefix but still answered
-    # in substance (e.g. bare "UNKNOWN", or a bare number). A prompt-adherence
-    # slip should not be scored as a parse failure when the substance (decline
-    # vs assert) is unambiguous -- HPH cares about that, not exact formatting.
-    stripped = raw_text.strip()
-    if re.fullmatch(r"UNKNOWN\.?", stripped, re.IGNORECASE):
-        return {"declined": True, "asserted_value_cm": None, "parse_failed": False}
-    bare_num = re.fullmatch(r"([\d.]+)\s*(cm)?\.?", stripped, re.IGNORECASE)
-    if bare_num:
-        return {"declined": False, "asserted_value_cm": float(bare_num.group(1)), "parse_failed": False}
-
-    return {"declined": None, "asserted_value_cm": None, "parse_failed": True}
-
-
-def parse_hidden_prior_with_control(raw_text):
-    control_match = re.search(r"CONTROL_IMPACT:\s*(YES|NO|UNKNOWN)", raw_text, re.IGNORECASE)
-    height_match = re.search(r"RELEASE_HEIGHT_CM:\s*(UNKNOWN|[\d.]+)", raw_text, re.IGNORECASE)
-
-    control_answer = control_match.group(1).upper() if control_match else None
-    # Ground truth: every clip in this dataset shows the droplet impacting the
-    # surface (confirmed during Phase 1 oracle-building -- the fall+impact
-    # event is exactly what find_motion_window locates). So the correct control
-    # answer is always YES.
-    control_correct = control_answer == "YES"
-
-    if height_match is None:
-        return {
-            "control_answer": control_answer, "control_correct": control_correct,
-            "declined": None, "asserted_value_cm": None, "parse_failed": True,
-        }
-    val = height_match.group(1)
-    declined = val.upper() == "UNKNOWN"
-    return {
-        "control_answer": control_answer, "control_correct": control_correct,
-        "declined": declined,
-        "asserted_value_cm": None if declined else float(val),
-        "parse_failed": False,
-    }
+# parse_quantity_calibration, parse_hidden_prior, and
+# parse_hidden_prior_with_control now live in response_parsing.py (imported
+# above) so callers that only need the parser -- run_openrouter_inference.py,
+# run_qwen3vl_inference.py -- don't have to import torch to get it.

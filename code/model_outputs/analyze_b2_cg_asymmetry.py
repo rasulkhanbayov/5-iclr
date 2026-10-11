@@ -20,10 +20,14 @@ are exactly 3.75 = 15/4, a fixed transform of the printed digit, still not the
 correct 0.5.
 """
 import json
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
-with open("/ephemeral/sgf_work/results/e2/e2_qwen_results.json") as f:
+with open(os.path.join(sgf_paths.RESULTS_DIR, "e2", "e2_qwen_results.json")) as f:
     qwen = json.load(f)
-with open("/ephemeral/sgf_work/results/e2/e2_gemini_flash_lite_results.json") as f:
+with open(os.path.join(sgf_paths.RESULTS_DIR, "e2", "e2_gemini_flash_lite_results.json")) as f:
     gemini = json.load(f)
 
 

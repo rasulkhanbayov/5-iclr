@@ -1,54 +1,75 @@
 import os
-os.environ.setdefault("HF_HOME", "/ephemeral/sgf_work/hf_cache")
+os.environ.setdefault("HF_HOME", os.path.join(os.path.expanduser("~"), "sgf_hf_cache"))
 
 import sys
 import json
 import time
 
-sys.path.insert(0, "/ephemeral/sgf_work/model_outputs")
-sys.path.insert(0, "/ephemeral/sgf_work/oracle")
+_CODE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(_CODE_DIR, "model_outputs"))
+sys.path.insert(0, os.path.join(_CODE_DIR, "oracle"))
 
 from prepare_clips import extract_fall_clip
 from run_qwen_inference import query_quantity_and_calibration
-from droplet_oracle import SESSION_CALIBRATION_PX_PER_MM
+sys.path.insert(0, _CODE_DIR)
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
-FALL_CLIP_DIR = "/ephemeral/sgf_work/model_outputs/fall_clips"
+# Rebased 2026-08-11 from the previous GPU-server paths (that server no
+# longer exists) to a Slurm cluster. E2 clip count expanded from 12 (6+6 across two
+# sessions) to 27 (all high-confidence 02182026 clips), since 05052026 is
+# unavailable at the time -- see
+# build_e2_manifest.py for the rescoping decision and rationale.
+FALL_CLIP_DIR = sgf_paths.FALL_CLIP_DIR
 os.makedirs(FALL_CLIP_DIR, exist_ok=True)
 
-OUT_PATH = "/ephemeral/sgf_work/results/e2/e2_qwen_results.json"
+OUT_PATH = os.path.join(sgf_paths.RESULTS_DIR, "e2", "e2_qwen_results.json")
 os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
 
-# Trimmed to 3s (see trim_scale_clips.py): the ruler/comb is static all clip, so
-# showing the model the full original (02182026's scale v.mp4 is 144s!) made a
-# single inference call take 7+ minutes instead of ~1 minute -- decord still has
-# to index/decode the whole long container even at low sample fps.
+TRIMMED_SCALE_DIR = sgf_paths.TRIMMED_SCALE_DIR
+
 SCALE_CLIPS = {
     "02182026": {
-        "base": "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/02182026_scalev_base_trim.mp4",
-        0.5: "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/02182026_scalev_alpha0.5_trim.mp4",
-        2: "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/02182026_scalev_alpha2_trim.mp4",
-    },
-    "05052026": {
-        "base": "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/05052026_scale2_base_trim.mp4",
-        0.5: "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/05052026_scale2_alpha0.5_trim.mp4",
-        2: "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/05052026_scale2_alpha2_trim.mp4",
+        "base": os.path.join(TRIMMED_SCALE_DIR, "02182026_scalev_base_trim.mp4"),
+        0.5: os.path.join(TRIMMED_SCALE_DIR, "02182026_scalev_alpha0.5_trim.mp4"),
+        2: os.path.join(TRIMMED_SCALE_DIR, "02182026_scalev_alpha2_trim.mp4"),
     },
 }
 
 TRUE_CALIBRATION_MM_PER_TICK = {
-    "02182026": 1.0,
-    "05052026": 1.0,
+    "02182026": 1.5875,  # CORRECTED: 1/16in (1.5875mm/tick), not 1mm -- see droplet_oracle.py
 }
 
 
 def main():
-    with open("/ephemeral/sgf_work/model_outputs/e2_selected_clips.json") as f:
+    manifest_path = sgf_paths.MANIFEST_PATH
+    if not os.path.exists(manifest_path):
+        print(f"ERROR: {manifest_path} does not exist. Run build_e2_manifest.py first.", file=sys.stderr)
+        sys.exit(1)
+    with open(manifest_path) as f:
         clips = json.load(f)
 
+    for src in SCALE_CLIPS["02182026"].values():
+        if not os.path.exists(src):
+            print(f"ERROR: {src} does not exist. Run trim_scale_clips.py first.", file=sys.stderr)
+            sys.exit(1)
+
+    valid_clip_names = {os.path.basename(c["path"]) for c in clips}
     results = []
     if os.path.exists(OUT_PATH):
         with open(OUT_PATH) as f:
-            results = json.load(f)
+            loaded = json.load(f)
+        # Filter out entries for clips no longer in the manifest -- e.g. from
+        # a session's clips being dropped (05052026 was removed entirely from
+        # this manifest, 2026-08-11), so a resumed run doesn't silently carry
+        # forward results for footage that no longer exists. A prior run of
+        # this exact bug left 54 stale entries (6 old clips) mixed into 243
+        # valid ones; caught only by manually inspecting unique clip counts.
+        results = [r for r in loaded if r["clip"] in valid_clip_names]
+        n_dropped = len(loaded) - len(results)
+        if n_dropped:
+            print(f"Dropped {n_dropped} stale entries for clips no longer in "
+                  f"the manifest: {sorted(set(r['clip'] for r in loaded if r['clip'] not in valid_clip_names))}",
+                  flush=True)
     done_keys = {(r["clip"], r["condition"], r["seed_idx"]) for r in results}
 
     total = len(clips) * 3 * 3
@@ -57,7 +78,7 @@ def main():
 
     for clip_info in clips:
         session = clip_info["session"]
-        droplet_path = clip_info["path"]
+        droplet_path = sgf_paths.raw_video(clip_info["path"])
         clip_name = os.path.basename(droplet_path)
         true_v = clip_info["velocity"]["v_pre_impact_mps"]
         true_cal = TRUE_CALIBRATION_MM_PER_TICK[session]
@@ -79,9 +100,9 @@ def main():
                 # The "correct" calibration reading for CG is whatever the CURRENTLY
                 # DISPLAYED scale actually asserts: true_cal for the base (unperturbed)
                 # clip, or alpha*true_cal for a relabeled clip (relabel formula is
-                # new_label = alpha*original_label, see project_sgf_perturbation_renderer.md).
-                # CG scores whether the model correctly reads what's in front of it,
-                # not whether it somehow knows the pre-perturbation ground truth.
+                # new_label = alpha*original_label). CG scores whether the model
+                # correctly reads what's in front of it, not whether it somehow
+                # knows the pre-perturbation ground truth.
                 alpha = condition if condition != "base" else 1.0
                 asserted_cal = true_cal * alpha
                 try:

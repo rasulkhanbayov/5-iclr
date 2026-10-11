@@ -1,0 +1,29 @@
+# Python 3.10. Versions are the ones the paper's runs used.
+#
+# Reproducing the paper's numbers from the committed results
+# (reconcile.py, sgf_metrics.py, build_repro_csv.py) needs only numpy:
+#   pip install numpy==2.2.6
+
+# --- analysis -------------------------------------------------------------
+numpy==2.2.6
+
+# --- video: oracle, clip extraction, perturbation renderers ---------------
+opencv-python-headless==5.0.0.93
+
+# --- local VLM inference (Qwen2.5-VL-7B on A100, Qwen3-VL-30B-A3B on H200) ---
+# torch/torchvision are CUDA 12.4 wheels; install them first with
+#   pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
+# (slurm_jobs/00_setup_env.sh does this for you).
+torch==2.6.0
+torchvision==0.21.0
+transformers==5.15.0
+accelerate==1.14.0
+qwen-vl-utils==0.0.14
+av==17.1.0
+pillow  # required by qwen-vl-utils; exact version not recorded for the paper runs
+
+# --- Gemini 3.1 Pro via OpenRouter -----------------------------------------
+requests==2.34.2
+
+# --- dataset download / upload (scripts/) ------------------------------------
+huggingface_hub==1.33.0

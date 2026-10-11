@@ -4,17 +4,19 @@ impact-cropped clips (enhance_e3_clips.py) that failed in e3v3. Only these 5
 -- the other 7 already pass and don't need re-testing.
 """
 import os
-os.environ.setdefault("HF_HOME", "/ephemeral/sgf_work/hf_cache")
+os.environ.setdefault("HF_HOME", os.path.join(os.path.expanduser("~"), "sgf_hf_cache"))
 
 import sys
 import json
 import time
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
-sys.path.insert(0, "/ephemeral/sgf_work/model_outputs")
+sys.path.insert(0, os.path.join(sgf_paths.CODE_DIR, "model_outputs"))
 from run_qwen_inference import query_hidden_prior_with_control
 
-ENHANCED_DIR = "/ephemeral/sgf_work/model_outputs/fall_clips_enhanced"
-OUT_PATH = "/ephemeral/sgf_work/results/e3/e3_enhanced_retest_results.json"
+ENHANCED_DIR = sgf_paths.ENHANCED_FALL_CLIP_DIR
+OUT_PATH = os.path.join(sgf_paths.RESULTS_DIR, "e3", "e3_enhanced_retest_results.json")
 
 FAILING_CLIPS = ["cainhcg 0.08 b.mp4", "cainhg0.02 2.mp4", "0.08cg.mp4", "0.08cg2.mp4", "0.08cg3.mp4"]
 

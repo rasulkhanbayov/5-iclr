@@ -21,11 +21,15 @@ at least stopped changing shape quickly) rather than an arbitrary count.
 Cap how far this can extend (max_post_margin) so a droplet that never fully
 settles (e.g. keeps micro-jittering) doesn't blow up the clip length.
 """
+import os
 import sys
-sys.path.insert(0, "/ephemeral/sgf_work/oracle")
+_CODE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(_CODE_DIR, "oracle"))
 from droplet_oracle import find_motion_window, TRUE_FPS
 import cv2
 import numpy as np
+sys.path.insert(0, _CODE_DIR)
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
 
 def _roi_motion_series(cap, start_frame, end_frame, cx, cy, roi_half=80):
@@ -145,12 +149,12 @@ def find_settled_end(video_path, linked_track, motion_window, min_settle_frames=
 
 if __name__ == "__main__":
     import json
-    with open("/ephemeral/sgf_work/model_outputs/e2_selected_clips.json") as f:
+    with open(sgf_paths.MANIFEST_PATH) as f:
         clips = json.load(f)
 
     results = []
     for c in clips:
-        path = c["path"]
+        path = sgf_paths.raw_video(c["path"])
         cap = cv2.VideoCapture(path)
         window = find_motion_window(cap)
         cap.release()
@@ -196,5 +200,7 @@ if __name__ == "__main__":
               f"old_end={old_end} new_end={chosen_end} "
               f"(+{result['extra_frames_vs_fixed']}) hit_cap={result['hit_cap']}", flush=True)
 
-    with open("/ephemeral/sgf_work/results/e3/settled_window_tuning.json", "w") as f:
+    out_dir = os.path.join(sgf_paths.RESULTS_DIR, "e3")
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, "settled_window_tuning.json"), "w") as f:
         json.dump(results, f, indent=2)

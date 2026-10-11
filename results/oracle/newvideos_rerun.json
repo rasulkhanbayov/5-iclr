@@ -1,0 +1,189 @@
+[
+  {
+    "path": "13.5cm_speed/05122026/0.028tx1.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "velocity": {
+      "v_pre_impact_mps": 1.0627039184369844,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/0.028tx2.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "velocity": {
+      "v_pre_impact_mps": 1.0491807879097417,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/0.028tx3.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "velocity": {
+      "v_pre_impact_mps": 1.0434074740545454,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/0.45sds1.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "velocity": {
+      "v_pre_impact_mps": 1.100403045374969,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/0.45sds2.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "velocity": {
+      "v_pre_impact_mps": 1.0783003996661202,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/0.45sds3.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "velocity": {
+      "v_pre_impact_mps": 1.0455658319761658,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.028tx1.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "velocity": {
+      "v_pre_impact_mps": 1.0596353223466657,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.028tx2.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "velocity": {
+      "v_pre_impact_mps": 1.066917000336528,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.028tx3.mp4",
+    "session": "new_videos/05122026",
+    "error": "unreadable or corrupted video file (0 frames / failed to open)"
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.08cg1.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "velocity": {
+      "v_pre_impact_mps": 1.1143546548912135,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.08cg2.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 4,
+    "velocity": {
+      "v_pre_impact_mps": 1.100054283476074,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 4,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.08cg3.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 4,
+    "velocity": {
+      "v_pre_impact_mps": 1.0752829711339025,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 4,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.45sds.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "velocity": {
+      "v_pre_impact_mps": 1.0863696157218337,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.45sds2.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 4,
+    "velocity": {
+      "v_pre_impact_mps": 1.0745755609516192,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 4,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.45sds3.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "velocity": {
+      "v_pre_impact_mps": 1.0617577948125376,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    }
+  }
+]

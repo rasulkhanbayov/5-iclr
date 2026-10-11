@@ -1,0 +1,1185 @@
+{
+  "model": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+  "negative_control_sfs": {
+    "0.5": {
+      "n_pairs": 81,
+      "n_clips": 27,
+      "mean_r_resample": 0.9385802469135801,
+      "mean_abs_log_r": 0.25238264717061976,
+      "abs_log_r_cluster_ci95": [
+        0.17753555918395283,
+        0.33273945247447684
+      ]
+    },
+    "2": {
+      "n_pairs": 81,
+      "n_clips": 27,
+      "mean_r_resample": 1.5882716049382717,
+      "mean_abs_log_r": 0.42130741519059195,
+      "abs_log_r_cluster_ci95": [
+        0.324121341397697,
+        0.5184861690677395
+      ]
+    }
+  },
+  "policy_classification": {
+    "0.5": {
+      "n_pairs": 81,
+      "label_counts": {
+        "constant": 30,
+        "calibration_blind": 27,
+        "grounded": 1,
+        "unclassified": 23
+      },
+      "majority_label": "constant",
+      "per_pair": [
+        {
+          "clip": "cainhcg1.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhcg1.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhcg1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhcg2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhcg2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhcg2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhcg4.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.6,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhcg4.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhcg4.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhsds1.mp4",
+          "seed_idx": 0,
+          "r_R": 0.5,
+          "r_S": 1.0,
+          "label": "grounded"
+        },
+        {
+          "clip": "cainhsds1.mp4",
+          "seed_idx": 1,
+          "r_R": 0.6,
+          "r_S": 0.8,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainhsds1.mp4",
+          "seed_idx": 2,
+          "r_R": 0.8,
+          "r_S": 0.8,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainhsds2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhsds2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 0.5,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhsds2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhsds3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhsds3.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhsds3.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhtx1.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhtx1.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhtx1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 0.5,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhtx2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhtx2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhtx2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainlcg1.mp4",
+          "seed_idx": 0,
+          "r_R": 0.8,
+          "r_S": 1.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainlcg1.mp4",
+          "seed_idx": 1,
+          "r_R": 0.8,
+          "r_S": 1.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainlcg1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainlcg2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.6,
+          "r_S": 1.6,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainlcg2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.6,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlcg2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.6,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlcg3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlcg3.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlcg3.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlsds1.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainlsds1.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlsds1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainlsds2.mp4",
+          "seed_idx": 0,
+          "r_R": 0.8,
+          "r_S": 1.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainlsds2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlsds2.mp4",
+          "seed_idx": 2,
+          "r_R": 2.0,
+          "r_S": 1.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainlsds3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlsds3.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 0.5,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlsds3.mp4",
+          "seed_idx": 2,
+          "r_R": 1.25,
+          "r_S": 0.625,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainltx1.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainltx1.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainltx1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainltx2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 0.5,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainltx2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 0.5,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainltx2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainltx3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainltx3.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainltx3.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "caonly1.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "caonly1.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "caonly1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "caonly2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "caonly2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.8,
+          "r_S": 1.6,
+          "label": "unclassified"
+        },
+        {
+          "clip": "caonly2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.6,
+          "r_S": 1.6,
+          "label": "unclassified"
+        },
+        {
+          "clip": "caonly3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "caonly3.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 0.625,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "caonly3.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "tx.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 0.5,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "tx.mp4",
+          "seed_idx": 1,
+          "r_R": 0.8,
+          "r_S": 0.8,
+          "label": "unclassified"
+        },
+        {
+          "clip": "tx.mp4",
+          "seed_idx": 2,
+          "r_R": 2.0,
+          "r_S": 1.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water.mp4",
+          "seed_idx": 0,
+          "r_R": 0.8,
+          "r_S": 1.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water.mp4",
+          "seed_idx": 1,
+          "r_R": 0.8,
+          "r_S": 1.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water.mp4",
+          "seed_idx": 2,
+          "r_R": 2.0,
+          "r_S": 1.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.6,
+          "r_S": 0.8,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water2.mp4",
+          "seed_idx": 1,
+          "r_R": 0.8,
+          "r_S": 1.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water2.mp4",
+          "seed_idx": 2,
+          "r_R": 2.0,
+          "r_S": 2.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.6,
+          "r_S": 2.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water3.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "water3.mp4",
+          "seed_idx": 2,
+          "r_R": 2.0,
+          "r_S": 2.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water4.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 0.5,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water4.mp4",
+          "seed_idx": 1,
+          "r_R": 0.5,
+          "r_S": 0.5,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water4.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 0.5,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water5.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "water5.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "water5.mp4",
+          "seed_idx": 2,
+          "r_R": 0.5,
+          "r_S": 0.5,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water6.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "water6.mp4",
+          "seed_idx": 1,
+          "r_R": 0.8,
+          "r_S": 0.8,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water6.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 0.8,
+          "label": "calibration_blind"
+        }
+      ]
+    },
+    "2": {
+      "n_pairs": 81,
+      "label_counts": {
+        "calibration_blind": 51,
+        "unclassified": 22,
+        "constant": 8
+      },
+      "majority_label": "calibration_blind",
+      "per_pair": [
+        {
+          "clip": "cainhcg1.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.6,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhcg1.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.6,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhcg1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhcg2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.125,
+          "r_S": 1.25,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainhcg2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.125,
+          "r_S": 1.25,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainhcg2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhcg4.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhcg4.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.6,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhcg4.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhsds1.mp4",
+          "seed_idx": 0,
+          "r_R": 0.625,
+          "r_S": 1.25,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainhsds1.mp4",
+          "seed_idx": 1,
+          "r_R": 0.8,
+          "r_S": 2.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainhsds1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhsds2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhsds2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhsds2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhsds3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhsds3.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhsds3.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhtx1.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhtx1.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhtx1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhtx2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainhtx2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainhtx2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlcg1.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlcg1.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlcg1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlcg2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlcg2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlcg2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlcg3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.125,
+          "r_S": 1.25,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainlcg3.mp4",
+          "seed_idx": 1,
+          "r_R": 1.125,
+          "r_S": 1.25,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainlcg3.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlsds1.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlsds1.mp4",
+          "seed_idx": 1,
+          "r_R": 1.125,
+          "r_S": 1.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainlsds1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlsds2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlsds2.mp4",
+          "seed_idx": 1,
+          "r_R": 2.0,
+          "r_S": 2.5,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainlsds2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.25,
+          "r_S": 2.5,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainlsds3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlsds3.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainlsds3.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainltx1.mp4",
+          "seed_idx": 0,
+          "r_R": 1.125,
+          "r_S": 1.25,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainltx1.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainltx1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.125,
+          "r_S": 1.25,
+          "label": "unclassified"
+        },
+        {
+          "clip": "cainltx2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainltx2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainltx2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainltx3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "cainltx3.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "cainltx3.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "caonly1.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "caonly1.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "caonly1.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "caonly2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "caonly2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.6,
+          "r_S": 1.6,
+          "label": "unclassified"
+        },
+        {
+          "clip": "caonly2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.6,
+          "r_S": 2.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "caonly3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "caonly3.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "caonly3.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.0,
+          "label": "constant"
+        },
+        {
+          "clip": "tx.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "tx.mp4",
+          "seed_idx": 1,
+          "r_R": 1.6,
+          "r_S": 2.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "tx.mp4",
+          "seed_idx": 2,
+          "r_R": 1.25,
+          "r_S": 2.5,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water.mp4",
+          "seed_idx": 1,
+          "r_R": 0.8,
+          "r_S": 2.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 2.5,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water2.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water2.mp4",
+          "seed_idx": 1,
+          "r_R": 1.6,
+          "r_S": 2.0,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water2.mp4",
+          "seed_idx": 2,
+          "r_R": 1.25,
+          "r_S": 2.5,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water3.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water3.mp4",
+          "seed_idx": 1,
+          "r_R": 0.6,
+          "r_S": 1.25,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water3.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water4.mp4",
+          "seed_idx": 0,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water4.mp4",
+          "seed_idx": 1,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water4.mp4",
+          "seed_idx": 2,
+          "r_R": 1.0,
+          "r_S": 1.25,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water5.mp4",
+          "seed_idx": 0,
+          "r_R": 1.25,
+          "r_S": 2.5,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water5.mp4",
+          "seed_idx": 1,
+          "r_R": 1.25,
+          "r_S": 2.5,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water5.mp4",
+          "seed_idx": 2,
+          "r_R": 0.625,
+          "r_S": 1.25,
+          "label": "unclassified"
+        },
+        {
+          "clip": "water6.mp4",
+          "seed_idx": 0,
+          "r_R": 0.96,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water6.mp4",
+          "seed_idx": 1,
+          "r_R": 0.96,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        },
+        {
+          "clip": "water6.mp4",
+          "seed_idx": 2,
+          "r_R": 0.96,
+          "r_S": 2.0,
+          "label": "calibration_blind"
+        }
+      ]
+    }
+  },
+  "note": "classify_policy() applied pairing E2's relabel ratio r_R (alpha) with X4's resample ratio r_S (s) at matching magnitude (0.5<->0.5, 2<->2), per (clip, seed_idx). Majority label across the 81 (clip,seed) pairs per alpha reported; see per_pair for the full per-item classification."
+}

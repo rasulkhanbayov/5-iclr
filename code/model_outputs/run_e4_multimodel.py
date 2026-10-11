@@ -16,11 +16,14 @@ we happened to have local weights for.
 import sys
 import json
 import numpy as np
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
-sys.path.insert(0, "/home/ubuntu/5-ICLR (work with Dr. Mariam)")
+sys.path.insert(0, sgf_paths.REPO_ROOT)
 from sgf_metrics import scale_faithfulness_score, relative_error, bootstrap_ci
 
-OUT_PATH = "/ephemeral/sgf_work/results/e4/e4_multimodel_decoupling.json"
+OUT_PATH = os.path.join(sgf_paths.RESULTS_DIR, "e4", "e4_multimodel_decoupling.json")
 
 
 def load_triples(path, model_name):
@@ -80,8 +83,8 @@ def bootstrap_corr(a, b, n_boot=10000, seed=0):
 
 
 def main():
-    qwen_items = load_triples("/ephemeral/sgf_work/results/e2/e2_qwen_results.json", "Qwen2.5-VL-7B-Instruct")
-    gem_items = load_triples("/ephemeral/sgf_work/results/e2/e2_gemini_flash_lite_results.json", "gemini-2.5-flash-lite")
+    qwen_items = load_triples(os.path.join(sgf_paths.RESULTS_DIR, "e2", "e2_qwen_results.json"), "Qwen2.5-VL-7B-Instruct")
+    gem_items = load_triples(os.path.join(sgf_paths.RESULTS_DIR, "e2", "e2_gemini_flash_lite_results.json"), "gemini-2.5-flash-lite")
     all_items = qwen_items + gem_items
 
     per_model = {}

@@ -1,0 +1,806 @@
+[
+  {
+    "path": "02182026/cainhcg5.mp4",
+    "session": "02182026",
+    "linked_track_len": 0,
+    "motion_window": [
+      16,
+      55
+    ],
+    "error": "no linkable primary droplet found"
+  },
+  {
+    "path": "02182026/cainhcg4.mp4",
+    "session": "02182026",
+    "linked_track_len": 40,
+    "motion_window": [
+      141,
+      180
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0890003969415498,
+      "impact_frame": 168,
+      "plateau_end_frame": 164,
+      "n_points_used": 5
+    },
+    "max_area_px": 15816,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 17.5
+  },
+  {
+    "path": "02182026/cainhsds3.mp4",
+    "session": "02182026",
+    "linked_track_len": 39,
+    "motion_window": [
+      211,
+      250
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0466885981045024,
+      "impact_frame": 240,
+      "plateau_end_frame": 235,
+      "n_points_used": 5
+    },
+    "max_area_px": 16357,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 19.2
+  },
+  {
+    "path": "02182026/cainhcg2.mp4",
+    "session": "02182026",
+    "linked_track_len": 35,
+    "motion_window": [
+      101,
+      140
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.1712504894257856,
+      "impact_frame": 131,
+      "plateau_end_frame": 127,
+      "n_points_used": 5
+    },
+    "max_area_px": 14282,
+    "n_blobs_multi_frame_count": 17,
+    "elapsed_s": 22.6
+  },
+  {
+    "path": "02182026/cainhcg3.mp4",
+    "session": "02182026",
+    "linked_track_len": 0,
+    "motion_window": [
+      71,
+      110
+    ],
+    "error": "no linkable primary droplet found"
+  },
+  {
+    "path": "02182026/cainhcg1.mp4",
+    "session": "02182026",
+    "linked_track_len": 39,
+    "motion_window": [
+      371,
+      410
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0833576360680734,
+      "impact_frame": 397,
+      "plateau_end_frame": 394,
+      "n_points_used": 5
+    },
+    "max_area_px": 10384,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 24.1
+  },
+  {
+    "path": "02182026/cainhsds2.mp4",
+    "session": "02182026",
+    "linked_track_len": 7,
+    "motion_window": [
+      1046,
+      1085
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 0.5357037746642891,
+      "impact_frame": 1056,
+      "plateau_end_frame": 1056,
+      "n_points_used": 5
+    },
+    "max_area_px": 19763,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 26.7
+  },
+  {
+    "path": "02182026/cainhsds1.mp4",
+    "session": "02182026",
+    "linked_track_len": 38,
+    "motion_window": [
+      761,
+      800
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0643755184027925,
+      "impact_frame": 788,
+      "plateau_end_frame": 784,
+      "n_points_used": 5
+    },
+    "max_area_px": 6570,
+    "n_blobs_multi_frame_count": 7,
+    "elapsed_s": 27.3
+  },
+  {
+    "path": "02182026/cainhtx3.mp4",
+    "session": "02182026",
+    "linked_track_len": 41,
+    "motion_window": [
+      1,
+      35
+    ],
+    "velocity": null,
+    "max_area_px": 18685,
+    "n_blobs_multi_frame_count": 41,
+    "elapsed_s": 15.3
+  },
+  {
+    "path": "02182026/cainhtx2.mp4",
+    "session": "02182026",
+    "linked_track_len": 42,
+    "motion_window": [
+      51,
+      90
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.170838480962016,
+      "impact_frame": 73,
+      "plateau_end_frame": 71,
+      "n_points_used": 5
+    },
+    "max_area_px": 12085,
+    "n_blobs_multi_frame_count": 33,
+    "elapsed_s": 17.1
+  },
+  {
+    "path": "02182026/cainhtx1.mp4",
+    "session": "02182026",
+    "linked_track_len": 39,
+    "motion_window": [
+      306,
+      345
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.1126971958845546,
+      "impact_frame": 332,
+      "plateau_end_frame": 329,
+      "n_points_used": 5
+    },
+    "max_area_px": 13990,
+    "n_blobs_multi_frame_count": 21,
+    "elapsed_s": 24.5
+  },
+  {
+    "path": "02182026/cainlcg3.mp4",
+    "session": "02182026",
+    "linked_track_len": 39,
+    "motion_window": [
+      76,
+      115
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 0.674445760939807,
+      "impact_frame": 104,
+      "plateau_end_frame": 99,
+      "n_points_used": 5
+    },
+    "max_area_px": 15987,
+    "n_blobs_multi_frame_count": 26,
+    "elapsed_s": 20.9
+  },
+  {
+    "path": "02182026/cainlsds2.mp4",
+    "session": "02182026",
+    "linked_track_len": 40,
+    "motion_window": [
+      471,
+      510
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0899896771808988,
+      "impact_frame": 497,
+      "plateau_end_frame": 493,
+      "n_points_used": 5
+    },
+    "max_area_px": 18436,
+    "n_blobs_multi_frame_count": 15,
+    "elapsed_s": 18.8
+  },
+  {
+    "path": "02182026/cainlcg1.mp4",
+    "session": "02182026",
+    "linked_track_len": 18,
+    "motion_window": [
+      621,
+      660
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0756114412168851,
+      "impact_frame": 646,
+      "plateau_end_frame": 646,
+      "n_points_used": 5
+    },
+    "max_area_px": 2891,
+    "n_blobs_multi_frame_count": 28,
+    "elapsed_s": 24.9
+  },
+  {
+    "path": "02182026/cainlcg2.mp4",
+    "session": "02182026",
+    "linked_track_len": 36,
+    "motion_window": [
+      76,
+      115
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.075303026763245,
+      "impact_frame": 107,
+      "plateau_end_frame": 103,
+      "n_points_used": 5
+    },
+    "max_area_px": 14442,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 25.2
+  },
+  {
+    "path": "02182026/cainltx1.mp4",
+    "session": "02182026",
+    "linked_track_len": 40,
+    "motion_window": [
+      286,
+      325
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0956038656271894,
+      "impact_frame": 312,
+      "plateau_end_frame": 309,
+      "n_points_used": 5
+    },
+    "max_area_px": 11312,
+    "n_blobs_multi_frame_count": 7,
+    "elapsed_s": 17.0
+  },
+  {
+    "path": "02182026/cainlsds1.mp4",
+    "session": "02182026",
+    "linked_track_len": 24,
+    "motion_window": [
+      221,
+      260
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.1332615268785367,
+      "impact_frame": 249,
+      "plateau_end_frame": 244,
+      "n_points_used": 5
+    },
+    "max_area_px": 11966,
+    "n_blobs_multi_frame_count": 28,
+    "elapsed_s": 25.5
+  },
+  {
+    "path": "02182026/cainlsds3.mp4",
+    "session": "02182026",
+    "linked_track_len": 37,
+    "motion_window": [
+      236,
+      275
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0962825854905764,
+      "impact_frame": 264,
+      "plateau_end_frame": 261,
+      "n_points_used": 5
+    },
+    "max_area_px": 16588,
+    "n_blobs_multi_frame_count": 8,
+    "elapsed_s": 24.1
+  },
+  {
+    "path": "02182026/cainltx2.mp4",
+    "session": "02182026",
+    "linked_track_len": 35,
+    "motion_window": [
+      1121,
+      1160
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.090068870722135,
+      "impact_frame": 1149,
+      "plateau_end_frame": 1144,
+      "n_points_used": 5
+    },
+    "max_area_px": 19526,
+    "n_blobs_multi_frame_count": 1,
+    "elapsed_s": 26.8
+  },
+  {
+    "path": "02182026/cainltx3.mp4",
+    "session": "02182026",
+    "linked_track_len": 38,
+    "motion_window": [
+      601,
+      640
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.110864395323057,
+      "impact_frame": 628,
+      "plateau_end_frame": 625,
+      "n_points_used": 5
+    },
+    "max_area_px": 12960,
+    "n_blobs_multi_frame_count": 7,
+    "elapsed_s": 20.8
+  },
+  {
+    "path": "02182026/caonly1.mp4",
+    "session": "02182026",
+    "linked_track_len": 43,
+    "motion_window": [
+      81,
+      120
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.110338537203548,
+      "impact_frame": 104,
+      "plateau_end_frame": 100,
+      "n_points_used": 5
+    },
+    "max_area_px": 11756,
+    "n_blobs_multi_frame_count": 12,
+    "elapsed_s": 20.1
+  },
+  {
+    "path": "02182026/caonly2.mp4",
+    "session": "02182026",
+    "linked_track_len": 38,
+    "motion_window": [
+      261,
+      300
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.1112299937561392,
+      "impact_frame": 290,
+      "plateau_end_frame": 285,
+      "n_points_used": 5
+    },
+    "max_area_px": 18931,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 23.4
+  },
+  {
+    "path": "02182026/caonly3.mp4",
+    "session": "02182026",
+    "linked_track_len": 37,
+    "motion_window": [
+      181,
+      220
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.1412136915955462,
+      "impact_frame": 210,
+      "plateau_end_frame": 206,
+      "n_points_used": 5
+    },
+    "max_area_px": 16942,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 22.5
+  },
+  {
+    "path": "02182026/tx.mp4",
+    "session": "02182026",
+    "linked_track_len": 40,
+    "motion_window": [
+      631,
+      670
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.1251472419173287,
+      "impact_frame": 657,
+      "plateau_end_frame": 653,
+      "n_points_used": 5
+    },
+    "max_area_px": 14485,
+    "n_blobs_multi_frame_count": 1,
+    "elapsed_s": 20.8
+  },
+  {
+    "path": "02182026/water.mp4",
+    "session": "02182026",
+    "linked_track_len": 36,
+    "motion_window": [
+      411,
+      450
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.1054430613778632,
+      "impact_frame": 443,
+      "plateau_end_frame": 437,
+      "n_points_used": 5
+    },
+    "max_area_px": 14881,
+    "n_blobs_multi_frame_count": 4,
+    "elapsed_s": 20.4
+  },
+  {
+    "path": "02182026/water2.mp4",
+    "session": "02182026",
+    "linked_track_len": 42,
+    "motion_window": [
+      416,
+      455
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.062629490231464,
+      "impact_frame": 442,
+      "plateau_end_frame": 437,
+      "n_points_used": 5
+    },
+    "max_area_px": 19600,
+    "n_blobs_multi_frame_count": 2,
+    "elapsed_s": 19.4
+  },
+  {
+    "path": "02182026/water3.mp4",
+    "session": "02182026",
+    "linked_track_len": 57,
+    "motion_window": [
+      261,
+      300
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.2341506909530422,
+      "impact_frame": 264,
+      "plateau_end_frame": 263,
+      "n_points_used": 5
+    },
+    "max_area_px": 980,
+    "n_blobs_multi_frame_count": 39,
+    "elapsed_s": 21.1
+  },
+  {
+    "path": "02182026/water4.mp4",
+    "session": "02182026",
+    "linked_track_len": 39,
+    "motion_window": [
+      661,
+      700
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.143906785256471,
+      "impact_frame": 689,
+      "plateau_end_frame": 684,
+      "n_points_used": 5
+    },
+    "max_area_px": 15800,
+    "n_blobs_multi_frame_count": 3,
+    "elapsed_s": 19.3
+  },
+  {
+    "path": "02182026/water6.mp4",
+    "session": "02182026",
+    "linked_track_len": 42,
+    "motion_window": [
+      256,
+      295
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.1272415676632785,
+      "impact_frame": 280,
+      "plateau_end_frame": 275,
+      "n_points_used": 5
+    },
+    "max_area_px": 14861,
+    "n_blobs_multi_frame_count": 29,
+    "elapsed_s": 23.0
+  },
+  {
+    "path": "02182026/water5.mp4",
+    "session": "02182026",
+    "linked_track_len": 36,
+    "motion_window": [
+      651,
+      690
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.14143246878663,
+      "impact_frame": 682,
+      "plateau_end_frame": 677,
+      "n_points_used": 5
+    },
+    "max_area_px": 15356,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 31.1
+  },
+  {
+    "path": "13.5cm_speed/05122026/0.028tx1.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "motion_window": [
+      306,
+      345
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0627039184369667,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 16028,
+    "n_blobs_multi_frame_count": 23,
+    "elapsed_s": 37.9
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.028tx3.mp4",
+    "session": "new_videos/05122026",
+    "error": "unreadable or corrupted video file (0 frames / failed to open)"
+  },
+  {
+    "path": "13.5cm_speed/05122026/0.028tx2.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "motion_window": [
+      721,
+      760
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0491807879097268,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 13281,
+    "n_blobs_multi_frame_count": 58,
+    "elapsed_s": 40.4
+  },
+  {
+    "path": "13.5cm_speed/05122026/0.45sds1.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "motion_window": [
+      611,
+      650
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.1004030453749236,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 18879,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 36.7
+  },
+  {
+    "path": "13.5cm_speed/05122026/0.45sds3.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "motion_window": [
+      1326,
+      1365
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0455658319760606,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 12151,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 33.0
+  },
+  {
+    "path": "13.5cm_speed/05122026/0.45sds2.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "motion_window": [
+      3176,
+      3215
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.078300399665906,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 15306,
+    "n_blobs_multi_frame_count": 4,
+    "elapsed_s": 36.9
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.028tx2.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "motion_window": [
+      2426,
+      2465
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0669170003363755,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 14308,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 34.6
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.028tx1.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "motion_window": [
+      1196,
+      1235
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0596353223466812,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 13045,
+    "n_blobs_multi_frame_count": 5,
+    "elapsed_s": 38.2
+  },
+  {
+    "path": "13.5cm_speed/05122026/0.028tx3.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "motion_window": [
+      2856,
+      2895
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0434074740544557,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 13542,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 61.1
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.08cg2.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 4,
+    "motion_window": [
+      1171,
+      1210
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.1000542834760685,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 4,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 19427,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 24.4
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.08cg1.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "motion_window": [
+      641,
+      680
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.1143546548911931,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 17065,
+    "n_blobs_multi_frame_count": 4,
+    "elapsed_s": 34.0
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.45sds.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "motion_window": [
+      321,
+      360
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.08636961572183,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 16658,
+    "n_blobs_multi_frame_count": 28,
+    "elapsed_s": 25.8
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.08cg3.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 4,
+    "motion_window": [
+      1336,
+      1375
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0752829711338239,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 4,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 17433,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 29.5
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.45sds2.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 4,
+    "motion_window": [
+      1746,
+      1785
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.0745755609516143,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 4,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 19157,
+    "n_blobs_multi_frame_count": 0,
+    "elapsed_s": 25.6
+  },
+  {
+    "path": "13.5cm_speed/05122026/cain0.45sds3.mp4",
+    "session": "new_videos/05122026",
+    "linked_track_len": 3,
+    "motion_window": [
+      1881,
+      1920
+    ],
+    "velocity": {
+      "v_pre_impact_mps": 1.061757794812595,
+      "impact_frame": null,
+      "plateau_end_frame": null,
+      "n_points_used": 3,
+      "low_confidence": true,
+      "reason": "track too short to detect impact/deceleration; plain average velocity over visible fall"
+    },
+    "max_area_px": 13562,
+    "n_blobs_multi_frame_count": 10,
+    "elapsed_s": 26.0
+  }
+]

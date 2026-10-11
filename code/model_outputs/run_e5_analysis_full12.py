@@ -9,12 +9,15 @@ droplet clips or concentrated in a subset.
 import sys
 import json
 import numpy as np
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
-sys.path.insert(0, "/home/ubuntu/5-ICLR (work with Dr. Mariam)")
+sys.path.insert(0, sgf_paths.REPO_ROOT)
 from sgf_metrics import scale_faithfulness_score, bootstrap_ci
 
-RESULTS_PATH = "/ephemeral/sgf_work/results/e5/e5_qwen_results_full12.json"
-OUT_PATH = "/ephemeral/sgf_work/results/e5/e5_stability_table_full12.json"
+RESULTS_PATH = os.path.join(sgf_paths.RESULTS_DIR, "e5", "e5_qwen_results_full12.json")
+OUT_PATH = os.path.join(sgf_paths.RESULTS_DIR, "e5", "e5_stability_table_full12.json")
 
 ALPHAS = [0.25, 0.5, 2, 4]
 TRUE_CAL = 1.0

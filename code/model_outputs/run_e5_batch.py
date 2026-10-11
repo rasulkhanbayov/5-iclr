@@ -12,31 +12,34 @@ Condition grid per clip: 4 alphas {0.25, 0.5, 2, 4} x 2 orientations
 run_qwen_inference.query_quantity_and_calibration exactly as E2 did.
 """
 import os
-os.environ.setdefault("HF_HOME", "/ephemeral/sgf_work/hf_cache")
+os.environ.setdefault("HF_HOME", os.path.join(os.path.expanduser("~"), "sgf_hf_cache"))
 
 import sys
 import json
 import time
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
-sys.path.insert(0, "/ephemeral/sgf_work/model_outputs")
-sys.path.insert(0, "/ephemeral/sgf_work/oracle")
+sys.path.insert(0, os.path.join(sgf_paths.CODE_DIR, "model_outputs"))
+sys.path.insert(0, os.path.join(sgf_paths.CODE_DIR, "oracle"))
 
 from run_qwen_inference import query_quantity_and_calibration
 
-FALL_CLIP_DIR = "/ephemeral/sgf_work/model_outputs/fall_clips"
-SCALE_DIR = "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips"
-OUT_PATH = "/ephemeral/sgf_work/results/e5/e5_qwen_results.json"
+FALL_CLIP_DIR = sgf_paths.FALL_CLIP_DIR
+SCALE_DIR = sgf_paths.TRIMMED_SCALE_DIR
+OUT_PATH = os.path.join(sgf_paths.RESULTS_DIR, "e5", "e5_qwen_results.json")
 os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
 
 ALPHAS = [0.25, 0.5, 2, 4]
 ORIENTATIONS = ["orig", "rot"]
 
-TRUE_CALIBRATION_MM_PER_TICK = {"02182026": 1.0, "05052026": 1.0}
+# CORRECTED: 02182026 is 1/16in (1.5875mm/tick), not 1mm -- see droplet_oracle.py
+TRUE_CALIBRATION_MM_PER_TICK = {"02182026": 1.5875, "05052026": 1.0}
 
 SELECTED_CLIPS = [
-    {"path": "/ephemeral/videos/02182026/water.mp4", "session": "02182026",
+    {"path": sgf_paths.raw_video("02182026/water.mp4"), "session": "02182026",
      "true_velocity_mps": 0.6963420859073182},
-    {"path": "/ephemeral/videos/05052026/0.08cg2.mp4", "session": "05052026",
+    {"path": sgf_paths.raw_video("05052026/0.08cg2.mp4"), "session": "05052026",
      "true_velocity_mps": 1.1641011404915609},
 ]
 
@@ -63,7 +66,7 @@ def main():
 
     for clip_info in SELECTED_CLIPS:
         session = clip_info["session"]
-        droplet_path = clip_info["path"]
+        droplet_path = sgf_paths.raw_video(clip_info["path"])
         clip_name = os.path.basename(droplet_path)
         true_v = clip_info["true_velocity_mps"]
         true_cal = TRUE_CALIBRATION_MM_PER_TICK[session]

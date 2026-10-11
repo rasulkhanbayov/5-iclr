@@ -21,15 +21,17 @@ import os
 import json
 import cv2
 import numpy as np
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
-sys.path.insert(0, "/ephemeral/sgf_work/oracle")
+sys.path.insert(0, os.path.join(sgf_paths.CODE_DIR, "oracle"))
 from droplet_oracle import (find_motion_window, build_static_background,
                              detect_droplet_blobs, link_primary_droplet, TRUE_FPS)
 
 FAILING_CLIPS = ["cainhcg 0.08 b.mp4", "cainhg0.02 2.mp4", "0.08cg.mp4", "0.08cg2.mp4", "0.08cg3.mp4"]
-SRC_DIR = "/ephemeral/videos/05052026"
-FALL_CLIP_DIR = "/ephemeral/sgf_work/model_outputs/fall_clips"
-OUT_DIR = "/ephemeral/sgf_work/model_outputs/fall_clips_enhanced"
+SRC_DIR = sgf_paths.raw_video("05052026")
+FALL_CLIP_DIR = sgf_paths.FALL_CLIP_DIR
+OUT_DIR = sgf_paths.ENHANCED_FALL_CLIP_DIR
 os.makedirs(OUT_DIR, exist_ok=True)
 
 CROP_HALF_W = 220

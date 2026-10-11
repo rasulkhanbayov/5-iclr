@@ -1,0 +1,58 @@
+{
+  "model": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+  "n_total_items": 243,
+  "n_clips": 27,
+  "conditions": [
+    "0.5",
+    "2",
+    "base"
+  ],
+  "calibration_grounding": {
+    "k": 0,
+    "n": 162,
+    "mean": 0.0,
+    "wilson_ci95": [
+      0.0,
+      0.023163440853524196
+    ],
+    "clopper_pearson_ci95": [
+      0.0,
+      0.02251356145280553
+    ],
+    "blind_policy_bound": 0.3333333333333333,
+    "binom_test_p_vs_blind": 1.6294095470658132e-15
+  },
+  "scale_faithfulness_score": {
+    "0.5": {
+      "sfs_mean": 0.08190516603019808,
+      "sfs_cluster_ci95": [
+        0.03179536739966643,
+        0.14581480883448314
+      ],
+      "n_pairs": 81,
+      "n_clips": 27,
+      "mean_r_relabel": 1.058641975308642
+    },
+    "2": {
+      "sfs_mean": 0.0803876926529869,
+      "sfs_cluster_ci95": [
+        0.03142739284302067,
+        0.13653006498073283
+      ],
+      "n_pairs": 81,
+      "n_clips": 27,
+      "mean_r_relabel": 1.0475925925925924
+    }
+  },
+  "identified_classes_relabel_only": {
+    "0.5": [
+      "calibration_blind",
+      "constant"
+    ],
+    "2": [
+      "calibration_blind",
+      "constant"
+    ]
+  },
+  "note": "E2 (relabeling) only -- no X4 (resampling) or X10 (instructed-constant) run exists yet for Qwen3-VL, so classify_policy() cannot be called and no single policy label (grounded/calibration_blind/constant) can be assigned. identified_classes_from_relabel_only() reports the honest Theorem-1 set instead. Full classification requires an X4 run."
+}

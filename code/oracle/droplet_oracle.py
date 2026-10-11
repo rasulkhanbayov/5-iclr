@@ -14,7 +14,23 @@ import numpy as np
 TRUE_FPS = 2996.0
 
 SESSION_CALIBRATION_PX_PER_MM = {
-    "02182026": 104.52,
+    # CORRECTED 2026-08-22: 02182026's ruler is graduated in 1/16" (1.5875mm)
+    # per tick, not 1mm -- confirmed by the human authors (session predates
+    # 05052026 and the two "later" sessions, all of which use a genuine 1mm
+    # ruler; 02182026 is the one "earlier" inch-graduated exception). The
+    # original 104.52 was measured as px PER TICK assuming 1 tick = 1mm; the
+    # corrected value divides by the true 1.5875mm tick pitch, exactly the
+    # same correction already applied below for new_videos/05122026's pin
+    # target. Free-fall cross-check (Appendix B.2/"Oracle error and scope"):
+    # under the old 104.52, oracle velocities disagreed with v=sqrt(2gh) by a
+    # mean 40% across 22 high-confidence 02182026 clips; under the corrected
+    # value the mean disagreement drops to 6%.
+    "02182026": 104.52 / 1.5875,
+    # 05052026 is confirmed absent from drops_videos/ as of 2026-08-11 (the old
+    # the old GPU-server that held it no longer exists). Kept here as a
+    # historical record, not live data -- run_batch.py's SESSIONS dict does not
+    # include it, so this key is never looked up. This session used a genuine
+    # 1mm ruler (one of the "later" sessions), so 66.19 is NOT corrected.
     "05052026": 66.19,
     "new_videos/05122026": 68.19 / 1.5875,  # 68.19 px per 1/16" pin pitch
 }

@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "One Perturbation Is Not Enough: Identifiability and Blind Baselines for Behavioral AI Evaluation"
+authors:
+  - family-names: Khanbayov
+    given-names: Rasul
+  - family-names: Sohail
+    given-names: Mariam
+  - family-names: Abdala
+    given-names: Ahmed
+  - family-names: Kurban
+    given-names: Hasan
+preferred-citation:
+  type: conference-paper
+  title: "One Perturbation Is Not Enough: Identifiability and Blind Baselines for Behavioral AI Evaluation"
+  authors:
+    - family-names: Khanbayov
+      given-names: Rasul
+    - family-names: Sohail
+      given-names: Mariam
+    - family-names: Abdala
+      given-names: Ahmed
+    - family-names: Kurban
+      given-names: Hasan
+  year: 2027
+  conference:
+    name: "AAAI Conference on Artificial Intelligence (Alignment Track)"
+  # arXiv identifier and URL to be added once assigned.
+  # identifiers:
+  #   - type: other
+  #     value: "arXiv:XXXX.XXXXX"
+  #     description: "arXiv preprint"
+  # url: "https://arxiv.org/abs/XXXX.XXXXX"

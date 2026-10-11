@@ -1,0 +1,191 @@
+[
+  {
+    "path": "02182026/cainhcg1.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.0833576360680734
+    }
+  },
+  {
+    "path": "02182026/cainhcg2.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.1712504894257856
+    }
+  },
+  {
+    "path": "02182026/cainhcg4.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.0890003969415498
+    }
+  },
+  {
+    "path": "02182026/cainhsds1.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.0643755184027925
+    }
+  },
+  {
+    "path": "02182026/cainhsds2.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 0.5357037746642891
+    }
+  },
+  {
+    "path": "02182026/cainhsds3.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.0466885981045024
+    }
+  },
+  {
+    "path": "02182026/cainhtx1.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.1126971958845546
+    }
+  },
+  {
+    "path": "02182026/cainhtx2.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.170838480962016
+    }
+  },
+  {
+    "path": "02182026/cainlcg1.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.0756114412168851
+    }
+  },
+  {
+    "path": "02182026/cainlcg2.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.075303026763245
+    }
+  },
+  {
+    "path": "02182026/cainlcg3.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 0.674445760939807
+    }
+  },
+  {
+    "path": "02182026/cainlsds1.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.1332615268785367
+    }
+  },
+  {
+    "path": "02182026/cainlsds2.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.0899896771808988
+    }
+  },
+  {
+    "path": "02182026/cainlsds3.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.0962825854905764
+    }
+  },
+  {
+    "path": "02182026/cainltx1.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.0956038656271894
+    }
+  },
+  {
+    "path": "02182026/cainltx2.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.090068870722135
+    }
+  },
+  {
+    "path": "02182026/cainltx3.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.110864395323057
+    }
+  },
+  {
+    "path": "02182026/caonly1.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.110338537203548
+    }
+  },
+  {
+    "path": "02182026/caonly2.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.1112299937561392
+    }
+  },
+  {
+    "path": "02182026/caonly3.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.1412136915955462
+    }
+  },
+  {
+    "path": "02182026/tx.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.1251472419173287
+    }
+  },
+  {
+    "path": "02182026/water.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.1054430613778632
+    }
+  },
+  {
+    "path": "02182026/water2.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.062629490231464
+    }
+  },
+  {
+    "path": "02182026/water3.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.2341506909530422
+    }
+  },
+  {
+    "path": "02182026/water4.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.143906785256471
+    }
+  },
+  {
+    "path": "02182026/water5.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.14143246878663
+    }
+  },
+  {
+    "path": "02182026/water6.mp4",
+    "session": "02182026",
+    "velocity": {
+      "v_pre_impact_mps": 1.1272415676632785
+    }
+  }
+]

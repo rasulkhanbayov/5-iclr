@@ -1,9 +1,12 @@
 import sys
 import json
-sys.path.insert(0, "/ephemeral/sgf_work/perturbation")
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
+sys.path.insert(0, os.path.join(sgf_paths.CODE_DIR, "perturbation"))
 from perturb_renderer import render_relabeled_scale_video
 
-OUT_DIR = "/ephemeral/sgf_work/perturbed_clips/e5"
+OUT_DIR = os.path.join(sgf_paths.PERTURBED_CLIP_DIR, "e5")
 import os
 os.makedirs(OUT_DIR, exist_ok=True)
 

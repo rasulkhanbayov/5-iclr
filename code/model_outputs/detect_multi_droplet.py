@@ -13,7 +13,10 @@ persists across the extraction window at a position clearly separate from the
 main linked-droplet trajectory.
 """
 import sys
-sys.path.insert(0, "/ephemeral/sgf_work/oracle")
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
+sys.path.insert(0, os.path.join(sgf_paths.CODE_DIR, "oracle"))
 from droplet_oracle import (detect_droplet_blobs, build_static_background,
                              find_motion_window, link_primary_droplet)
 import numpy as np
@@ -149,14 +152,14 @@ def detect_multi_droplet(video_path, pre_margin=15, post_margin=15,
 
 if __name__ == "__main__":
     import json
-    with open("/ephemeral/sgf_work/model_outputs/e2_selected_clips.json") as f:
+    with open(sgf_paths.MANIFEST_PATH) as f:
         clips = json.load(f)
     results = []
     for c in clips:
-        r = detect_multi_droplet(c["path"])
+        r = detect_multi_droplet(sgf_paths.raw_video(c["path"]))
         r["clip"] = c["path"].split("/")[-1]
         r["session"] = c["session"]
         results.append(r)
         print(f"{r['session']:12s} {r['clip']:25s} multi={r['is_multi_droplet']} -- {r['reason']}", flush=True)
-    with open("/ephemeral/sgf_work/results/e3/multi_droplet_check.json", "w") as f:
+    with open(os.path.join(sgf_paths.RESULTS_DIR, "e3", "multi_droplet_check.json"), "w") as f:
         json.dump(results, f, indent=2)

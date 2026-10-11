@@ -1,0 +1,206 @@
+{
+  "static_legibility": [
+    {
+      "session": "02182026",
+      "true_calibration_mm_per_tick": 1.5875,
+      "raw_response_native_resolution": "CALIBRATION_MM_PER_TICK: 1",
+      "video_path_resolution_hw": [
+        476,
+        1204
+      ],
+      "raw_response_video_resolution": "CALIBRATION_MM_PER_TICK: 1",
+      "true_calibration_mm_per_tick_ORIGINAL": 1.0
+    }
+  ],
+  "temporal_sufficiency": [
+    {
+      "n_frames_ingested_by_model": 124,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.0417222963951936,
+      "model_effective_time_resolution_s_per_frame": 0.0003364701322193032,
+      "clip": "cainhcg1.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 64,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.021361815754339118,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "cainhcg2.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 134,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.04506008010680908,
+      "model_effective_time_resolution_s_per_frame": 0.00033626925452842594,
+      "clip": "cainhcg4.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 96,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.03237650200267023,
+      "model_effective_time_resolution_s_per_frame": 0.00033725522919448155,
+      "clip": "cainhsds1.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 64,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.021361815754339118,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "cainhsds2.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 116,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.03871829105473965,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "cainhsds3.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 64,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.021361815754339118,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "cainhtx1.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 64,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.021361815754339118,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "cainhtx2.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 64,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.021361815754339118,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "cainlcg1.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 64,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.021361815754339118,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "cainlcg2.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 64,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.021361815754339118,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "cainlcg3.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 64,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.021695594125500667,
+      "model_effective_time_resolution_s_per_frame": 0.00033899365821094793,
+      "clip": "cainlsds1.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 82,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.027369826435246998,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615488,
+      "clip": "cainlsds2.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 74,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.024699599465954607,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "cainlsds3.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 86,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.02870493991989319,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "cainltx1.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 92,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.031041388518024033,
+      "model_effective_time_resolution_s_per_frame": 0.00033740639693504386,
+      "clip": "cainltx2.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 82,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.027703604806408544,
+      "model_effective_time_resolution_s_per_frame": 0.0003378488391025432,
+      "clip": "cainltx3.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 86,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.02870493991989319,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "caonly1.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 90,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.030040053404539385,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "caonly2.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 90,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.030040053404539385,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "caonly3.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 92,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.031041388518024033,
+      "model_effective_time_resolution_s_per_frame": 0.00033740639693504386,
+      "clip": "tx.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 92,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.030707610146862487,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615488,
+      "clip": "water.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 90,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.030040053404539385,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "water2.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 66,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.02202937249666222,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615488,
+      "clip": "water3.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 86,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.02903871829105474,
+      "model_effective_time_resolution_s_per_frame": 0.0003376595150122644,
+      "clip": "water4.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 86,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.02870493991989319,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615487,
+      "clip": "water5.mp4"
+    },
+    {
+      "n_frames_ingested_by_model": 82,
+      "requested_fps": 15.0,
+      "clip_real_time_span_s": 0.027369826435246998,
+      "model_effective_time_resolution_s_per_frame": 0.0003337783711615488,
+      "clip": "water6.mp4"
+    }
+  ]
+}

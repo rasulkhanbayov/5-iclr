@@ -17,36 +17,39 @@ os.environ.setdefault("OPENROUTER_API_KEY", "")  # must be set in environment be
 import sys
 import json
 import time
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
-sys.path.insert(0, "/ephemeral/sgf_work/model_outputs")
+sys.path.insert(0, os.path.join(sgf_paths.CODE_DIR, "model_outputs"))
 from run_openrouter_inference import query_quantity_and_calibration_openrouter
 
-FALL_CLIP_DIR = "/ephemeral/sgf_work/model_outputs/fall_clips"
-OUT_PATH = "/ephemeral/sgf_work/results/e2/e2_gemini_flash_lite_results.json"
+FALL_CLIP_DIR = sgf_paths.FALL_CLIP_DIR
+OUT_PATH = os.path.join(sgf_paths.RESULTS_DIR, "e2", "e2_gemini_flash_lite_results.json")
 os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
 
 MODEL = "google/gemini-2.5-flash-lite"
 
 SCALE_CLIPS = {
     "02182026": {
-        "base": "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/02182026_scalev_base_trim.mp4",
-        0.5: "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/02182026_scalev_alpha0.5_trim.mp4",
-        2: "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/02182026_scalev_alpha2_trim.mp4",
+        "base": os.path.join(sgf_paths.TRIMMED_SCALE_DIR, "02182026_scalev_base_trim.mp4"),
+        0.5: os.path.join(sgf_paths.TRIMMED_SCALE_DIR, "02182026_scalev_alpha0.5_trim.mp4"),
+        2: os.path.join(sgf_paths.TRIMMED_SCALE_DIR, "02182026_scalev_alpha2_trim.mp4"),
     },
     "05052026": {
-        "base": "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/05052026_scale2_base_trim.mp4",
-        0.5: "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/05052026_scale2_alpha0.5_trim.mp4",
-        2: "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/05052026_scale2_alpha2_trim.mp4",
+        "base": os.path.join(sgf_paths.TRIMMED_SCALE_DIR, "05052026_scale2_base_trim.mp4"),
+        0.5: os.path.join(sgf_paths.TRIMMED_SCALE_DIR, "05052026_scale2_alpha0.5_trim.mp4"),
+        2: os.path.join(sgf_paths.TRIMMED_SCALE_DIR, "05052026_scale2_alpha2_trim.mp4"),
     },
 }
 
-TRUE_CALIBRATION_MM_PER_TICK = {"02182026": 1.0, "05052026": 1.0}
+# CORRECTED: 02182026 is 1/16in (1.5875mm/tick), not 1mm -- see droplet_oracle.py
+TRUE_CALIBRATION_MM_PER_TICK = {"02182026": 1.5875, "05052026": 1.0}
 
 
 def main():
     assert os.environ.get("OPENROUTER_API_KEY"), "set OPENROUTER_API_KEY before running"
 
-    with open("/ephemeral/sgf_work/model_outputs/e2_selected_clips.json") as f:
+    with open(sgf_paths.MANIFEST_PATH) as f:
         clips = json.load(f)
 
     results = []
@@ -63,7 +66,7 @@ def main():
 
     for clip_info in clips:
         session = clip_info["session"]
-        droplet_path = clip_info["path"]
+        droplet_path = sgf_paths.raw_video(clip_info["path"])
         clip_name = os.path.basename(droplet_path)
         true_v = clip_info["velocity"]["v_pre_impact_mps"]
         true_cal = TRUE_CALIBRATION_MM_PER_TICK[session]

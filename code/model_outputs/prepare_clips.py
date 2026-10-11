@@ -22,9 +22,11 @@ Now uses tune_extraction_window.find_settled_end's per-clip motion-based
 settle detection instead of a fixed pad -- see that module's docstring for
 the settle criteria and why a single fixed margin doesn't work across clips.
 """
+import os
 import sys
-sys.path.insert(0, "/ephemeral/sgf_work/oracle")
-sys.path.insert(0, "/ephemeral/sgf_work/model_outputs")
+_CODE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(_CODE_DIR, "oracle"))
+sys.path.insert(0, os.path.join(_CODE_DIR, "model_outputs"))
 from droplet_oracle import (find_motion_window, TRUE_FPS, build_static_background,
                              detect_droplet_blobs, link_primary_droplet)
 from tune_extraction_window import find_settled_end

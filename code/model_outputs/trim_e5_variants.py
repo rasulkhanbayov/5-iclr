@@ -9,11 +9,13 @@ too for consistency across the E5 condition grid.
 import sys
 import os
 import json
-sys.path.insert(0, "/ephemeral/sgf_work/model_outputs")
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
+sys.path.insert(0, os.path.join(sgf_paths.CODE_DIR, "model_outputs"))
 from trim_scale_clips import trim_clip
 
-SRC_DIR = "/ephemeral/sgf_work/perturbed_clips/e5"
-OUT_DIR = "/ephemeral/sgf_work/model_outputs/trimmed_scale_clips/e5"
+SRC_DIR = os.path.join(sgf_paths.PERTURBED_CLIP_DIR, "e5")
+OUT_DIR = os.path.join(sgf_paths.TRIMMED_SCALE_DIR, "e5")
 os.makedirs(OUT_DIR, exist_ok=True)
 
 with open(os.path.join(SRC_DIR, "manifest.json")) as f:
@@ -34,7 +36,7 @@ for entry in manifest:
 # trims (trimmed_scale_clips/{session}_..._base_trim.mp4); only the ROTATED base
 # variant is new for E5.
 import cv2
-sys.path.insert(0, "/ephemeral/sgf_work/perturbation")
+sys.path.insert(0, os.path.join(sgf_paths.CODE_DIR, "perturbation"))
 from perturb_renderer import SESSION_LABEL_CONFIG
 
 for session in ["02182026", "05052026"]:

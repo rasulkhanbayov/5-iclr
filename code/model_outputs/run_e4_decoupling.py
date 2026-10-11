@@ -2,8 +2,8 @@
 E4 decoupling analysis (sgf_runbook.txt): correlate per-item Acc@10% with
 per-item SFS across E2's Qwen2.5-VL-7B results. Objective per the runbook is
 literally "correlate Acc@10% with SFS across all items/models" -- with only
-one model run (Qwen2.5-VL-7B; no API keys available in this environment, see
-CLAUDE.md), "across models" degenerates to "across items" here. Flagging
+one model run (Qwen2.5-VL-7B; no API keys were available when
+this legacy analysis ran), "across models" degenerates to "across items" here. Flagging
 that explicitly in the output rather than silently treating it as multi-model.
 
 Per-item unit: one (clip, seed_idx) triple (base, alpha=0.5, alpha=2) from
@@ -25,12 +25,15 @@ show -- do not keep a "decoupled" framing if the correlation says otherwise.
 import sys
 import json
 import numpy as np
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
-sys.path.insert(0, "/home/ubuntu/5-ICLR (work with Dr. Mariam)")
+sys.path.insert(0, sgf_paths.REPO_ROOT)
 from sgf_metrics import scale_faithfulness_score, acc_at_tau, relative_error, bootstrap_ci
 
-RESULTS_PATH = "/ephemeral/sgf_work/results/e2/e2_qwen_results.json"
-OUT_PATH = "/ephemeral/sgf_work/results/e4/e4_decoupling.json"
+RESULTS_PATH = os.path.join(sgf_paths.RESULTS_DIR, "e2", "e2_qwen_results.json")
+OUT_PATH = os.path.join(sgf_paths.RESULTS_DIR, "e4", "e4_decoupling.json")
 
 
 def build_items(results):

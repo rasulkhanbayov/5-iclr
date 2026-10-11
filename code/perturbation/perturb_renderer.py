@@ -29,28 +29,25 @@ never touched, same principle as the ruler case.
 from __future__ import annotations
 import cv2
 import numpy as np
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sgf_paths  # noqa: E402  (code/sgf_paths.py: all repo paths)
 
 
 # Per-session config: where the printed number lives, what it originally reads,
-# and how to draw a replacement. Found by hand via frame inspection (see
-# CLAUDE.md's Dataset Scope section and the frame_previews/ captures from
-# Phase 1). ROI coordinates are (x0, y0, x1, y1) in native 1280x512 pixels.
+# and how to draw a replacement. Found by hand via frame inspection (frame
+# previews captured during dataset scoping). ROI coordinates are (x0, y0, x1, y1) in native 1280x512 pixels.
+#
+# 05052026's entry was REMOVED 2026-08-11: that session is excluded
+# from the main experiments (its footage was unavailable when they were rerun). E2 and all downstream perturbation renders now use 02182026 only.
+# If 05052026 footage is ever recovered, its old config (roi=(150,0,450,300),
+# original_label="30", font_scale=2.6, thickness=6, rotate90=False,
+# text_position=(170,220), rotated_text_position=(60,550)) is recorded here
+# so it can be restored.
 SESSION_LABEL_CONFIG = {
-    "05052026": {
-        "scale_clip": "/ephemeral/videos/05052026/scale2.mp4",
-        "roi": (150, 0, 450, 300),
-        "original_label": "30",
-        "text_position": (170, 220),
-        "font_scale": 2.6,
-        "thickness": 6,
-        "rotate90": False,
-        # E5 rotate_orientation path: position chosen directly against the
-        # rotated (512w x 1280h) frame, see e5_check_05052026_rot_v3*.png --
-        # not a transform of text_position, see render_relabeled_scale_video.
-        "rotated_text_position": (60, 550),
-    },
     "02182026": {
-        "scale_clip": "/ephemeral/videos/02182026/scale v.mp4",
+        "scale_clip": sgf_paths.raw_video("02182026/scale v.mp4"),
         # ruler is physically rotated 90 degrees in-frame; numeral "12" reads
         # top-to-bottom, spanning roughly 330px tall (measured by hand from the
         # reference frame) -- much bigger than 05052026's "30", needs a larger
@@ -82,6 +79,27 @@ def _dark_mask(gray_frame, roi, std_frac=0.3):
     return cv2.dilate(full_mask, np.ones((7, 7), np.uint8), iterations=3)
 
 
+# "6" and "9" are each other's image under a 180-degree rotation of the GLYPH
+# ITSELF, so in a rotate90 label they are genuinely, completely ambiguous --
+# NOT merely hard to read. A mark added "below the glyph" (in whatever sense
+# survives the frame rotation) does NOT resolve this: an upright "6" and an
+# upright "9" both already have their string-drawing baseline at the bottom,
+# so a mark placed at that shared baseline appears in the same place for
+# BOTH digits and signals nothing (confirmed by hand, 2026-08-11: marking both
+# the same way produced two glyphs that still could not be told apart).
+# Fix, mirroring the standard convention on real measuring instruments: mark
+# ONLY "6", never "9". An unmarked ambiguous glyph is read as "9"; a marked
+# one is read as "6". The mark itself is a short line on the upright canvas's
+# RIGHT edge, which VERIFIED BY HAND lands BELOW the glyph in the frame as
+# actually stored in the .mp4 (the orientation the model receives -- no
+# additional rotation is applied anywhere in this pipeline) under
+# ROTATE_90_CLOCKWISE specifically; if this renderer's rotation direction is
+# ever changed, re-verify against a real digit's known-correct stored
+# orientation before trusting this placement again.
+_ROTATION_AMBIGUOUS_DIGITS = {"9"}  # the unmarked reading; "6" gets the mark instead
+_MARK_ONLY_THIS_DIGIT = "6"
+
+
 def relabel_ruler_frame(frame_bgr, roi, new_text, text_position, font_scale,
                          thickness, rotate90=False):
     """
@@ -106,9 +124,31 @@ def relabel_ruler_frame(frame_bgr, roi, new_text, text_position, font_scale,
     else:
         (tw, th), _ = cv2.getTextSize(new_text, cv2.FONT_HERSHEY_SIMPLEX, font_scale, thickness)
         pad = 10
-        canvas = np.full((th + pad * 2, tw + pad * 2, 3), int(bg_mean), dtype=np.uint8)
+        canvas_h = th + pad * 2
+        canvas = np.full((canvas_h, tw + pad * 2, 3), int(bg_mean), dtype=np.uint8)
         cv2.putText(canvas, new_text, (pad, th + pad), cv2.FONT_HERSHEY_SIMPLEX,
                     font_scale, (text_gray,) * 3, thickness, cv2.LINE_AA)
+        for i, ch in enumerate(new_text):
+            if ch != _MARK_ONLY_THIS_DIGIT:
+                continue
+            # Mark spans exactly this "6" character's own width, positioned by
+            # measuring the substring before it (so a "6" anywhere within a
+            # multi-digit label, e.g. "36", gets marked at its own position,
+            # not the whole label's edge). A mark drawn "below" the glyph in
+            # THIS upright canvas ends up on the ROTATED FRAME'S LEFT, not
+            # below the rotated glyph -- ROTATE_90_CLOCKWISE maps an upright
+            # canvas's bottom edge to the output's left edge (verified by
+            # hand: labeling all four edges of a test canvas and rotating
+            # showed TOP->right, BOTTOM->left, LEFT->top, RIGHT->bottom). So
+            # the mark that ends up BELOW the glyph in the final frame must be
+            # drawn along the upright canvas's RIGHT edge instead -- here,
+            # the right edge of this specific character's own bounding box.
+            (prefix_w, _), _ = cv2.getTextSize(new_text[:i], cv2.FONT_HERSHEY_SIMPLEX, font_scale, thickness) \
+                if i > 0 else ((0, 0), 0)
+            (char_w, _), _ = cv2.getTextSize(ch, cv2.FONT_HERSHEY_SIMPLEX, font_scale, thickness)
+            line_x = min(canvas.shape[1] - 2, pad + prefix_w + char_w + max(3, thickness // 2))
+            cv2.line(canvas, (line_x, pad), (line_x, th + pad),
+                     (text_gray,) * 3, max(2, thickness // 3), cv2.LINE_AA)
         rotated = cv2.rotate(canvas, cv2.ROTATE_90_CLOCKWISE)
         rh, rw = rotated.shape[:2]
         x0, y0 = text_position[0] - rw // 2, text_position[1] - rh // 2
@@ -279,7 +319,7 @@ def render_relabeled_scale_video(session_key, alpha, out_path, rotate_orientatio
 # region of the frame (above the pin tops) that never overlaps any pin.
 COMB_LABEL_CONFIG = {
     "new_videos/05122026": {
-        "scale_clip": "/ephemeral/videos/new_videos/05122026/scale2.mp4",
+        "scale_clip": sgf_paths.raw_video("13.5cm_speed/05122026/scale2.mp4"),
         "native_pitch_inches": 1.0 / 16,
         "banner_roi": (0, 0, 1280, 45),
         "text_position": (20, 32),

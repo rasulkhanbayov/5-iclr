@@ -1,23 +1,26 @@
-# LaTeX build artifacts
-*.aux
-*.log
-*.out
-*.toc
-*.bbl.bak
-*.blg
-
 # Python
 __pycache__/
 *.pyc
+*.pyo
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
 
-# OS
-.DS_Store
-
-# Stale pre-built submission bundle (predates current main.tex/main.pdf)
-sgf_submission.zip
-
-# Local Claude Code session state, not project content
-.claude/
-
-# Secrets -- never commit
+# Secrets
 .env
+
+# Data: raw + derived videos live on Hugging Face (scripts/download_data.py)
+data/
+sgf_hf_cache/
+hf_cache/
+
+# Slurm logs
+*.out
+*.err
+slurm-*.out
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
